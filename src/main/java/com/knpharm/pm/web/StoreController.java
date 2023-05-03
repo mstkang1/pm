@@ -1,4 +1,4 @@
-package com.knpharm.minol.web;
+package com.knpharm.pm.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

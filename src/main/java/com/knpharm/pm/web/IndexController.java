@@ -1,4 +1,4 @@
-package com.knpharm.minol.web;
+package com.knpharm.pm.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
