@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/ScrollToPlugin.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js'></script>
+    <script src="js/pm.js"></script>
+    <script src="js/pharmacy.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/pm.css"> 
+    <title>대한민국 무좀약 피엠</title>
+</head>
+<body>
+    <div class="dim"></div>
+    <!-- // 모바일 메뉴, 팝업 활성화 시 배경 어둡게 처리 -->
+    <header id="headerMenu">
+        <div class="header-wrap">
+            <h1 class="pc"><a href="index.html#main"><img src="img/logo.png" alt="PM 로고"></a></h1>
+            <h1 class="mo"><a href="index.html#main"><img src="img/mo-logo.png" alt="PM 로고"></a></h1>
+            <nav>
+                <div class="btn-menu-close mo">
+                    <img src="img/btn-menu-close.png" alt="메뉴 닫기버튼">
+                </div>
+                <div class="mo-menu-head mo">
+                    <img src="img/mo-logo.png" alt="PM 로고">
+                </div>
+                <!-- 2023.04.28 메뉴 링크변경 -->
+                <ul>
+                    <li><a href="javascript:pageMove(1);">브랜드 스토리</a></li>
+                    <li><a href="javascript:pageMove(2);">피엠</a></li>
+                    <li><a href="javascript:pageMove(3);">Q&amp;A</a></li>
+                </ul>
+                <p><a href="find_pharmarcy.html">약국찾기</a></p>
+            </nav>
+        </div>
+        <div class="btn-menu-open mo">
+            <img src="img/btn-menu-open.png" alt="메뉴 열기버튼">
+        </div>
+    </header>
+    <main>
+        <!-- 상단배너 영역 -->
+        <div class="section" id="main">
+            <!-- 메인배너 swiper -->
+            <div class="main-banner-wrap">
+                <div class="swiper main-banner pc">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="img/banner1.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="img/banner2.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="img/banner3.jpg" alt=""></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="product-button-prev"></div>
+                    <div class="product-button-next"></div>
+                </div>
+
+                <div class="swiper main-banner mo">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="img/mo-banner1.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="img/mo-banner2.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="img/mo-banner3.jpg" alt=""></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="product-button-prev"></div>
+                    <div class="product-button-next"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 브랜드 스토리 -->
+        <div class="section story" id="menu1"> <!-- 2023.04.28 class .story 추가, id #story -> #menu1로 변경-->
+            <div class="story-wrap">
+                <div class="desc-wrap">
+                    <div class="desc">
+                        <dl class="pc">
+                            <dt>SINCE 1957<br />국민의 발이 건강해야, 나라가 산다!</dt>
+                            <dd>1957년 무좀으로 고통 받던 국민들을 위해 무좀약 피엠 개발</dd>
+                            <dd>살리실산 (피엠의 주성분): 바르면 곧 각질이 벗겨지면서<br />피부 침투 효과가 당장 나타나기 때문에 당시 한국인의<br />투약습관에 가장 적합한 강점</dd>
+                            <dd>저소득 소비층도 쉽게 구입해 쓸 수 있도록 저렴한 가격에 판매</dd>
+                        </dl>
+                        <dl class="mo">
+                            <dt>SINCE 1957<br />국민의 발이 건강해야, 나라가 산다!</dt>
+                            <dd>1957년 무좀으로 고통 받던 국민들을 위해<br /> 무좀약 피엠 개발</dd>
+                            <dd>살리실산 (피엠의 주성분): 바르면 곧 각질이<br /> 벗겨지면서 피부 침투 효과가 당장 나타나기<br />때문에 당시 한국인의 투약습관에 가장<br /> 적합한 강점</dd>
+                            <dd>저소득 소비층도 쉽게 구입해 쓸 수 있도록<br />저렴한 가격에 판매</dd>
+                        </dl>
+                    </div>
+                </div>
+                <span class="big-people"></span>
+                <span class="people-01"></span>
+                <span class="people-02"></span>
+                <span class="people-03"></span>
+                <span class="people-04"></span>
+                <span class="pc people-05"></span>
+                <span class="tree-01"></span>
+                <span class="tree-02"></span>
+                <span class="grass-01"></span>
+                <span class="pc grass-02"></span>
+                <span class="grass-03"></span>
+            </div>
+        </div>
+
+        <!-- 피엠이 필요한 증상 -->
+        <div class="section" id="symptom">
+            <div class="symptom-wrap">
+                <h2>이럴 땐 피엠</h2>
+                <div class="desc pc">
+                    <ul class="pc">
+                        <li>
+                            <span></span>
+                            <dl>
+                                <dt>지간형 무좀</dt>
+                                <dd>발가락 사이가 짓무르거나<br /> 갈라지는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span></span>
+                            <dl>
+                                <dt>소수포형 무좀</dt>
+                                <dd>발바닥에 작은물집이<br /> 잡히는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span></span>
+                            <dl>
+                                <dt>각화형 무좀</dt>
+                                <dd>발바닥에 각질이<br />두터워지는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span></span>
+                            <dl>
+                                <dt>완선</dt>
+                                <dd>전염성 진균 감염으로 사타구니<br /> 부근 (사타구니, 허벅지 및 엉덩이)의<br /> 피부에 발생하는 질병</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span></span>
+                            <dl>
+                                <dt>백선</dt>
+                                <dd>몸의 어느 곳에서나 발생할 수<br /> 있는 전염성 진균 감염, 붉은 링<br /> 모양의 발진이 유발되는 질병</dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <div class="desc-mobile mo">
+                    <ul>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-01.png" alt=""></span>
+                            <dl>
+                                <dt>지간형 무좀</dt>
+                                <dd>발가락 사이가 짓무르거나<br /> 갈라지는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-02.png" alt=""></span>
+                            <dl>
+                                <dt>소수포형 무좀</dt>
+                                <dd>발바닥에 작은물집이<br /> 잡히는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-03.png" alt=""></span>
+                            <dl>
+                                <dt>각화형 무좀</dt>
+                                <dd>발바닥에 각질이<br />두터워지는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-04.png" alt=""></span>
+                            <dl>
+                                <dt>완선</dt>
+                                <dd>전염성 진균 감염으로<br /> 사타구니 부근 (사타구니,<br /> 허벅지 및 엉덩이)의 피부에<br /> 발생하는 질병</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-05.png" alt=""></span>
+                            <dl>
+                                <dt>백선</dt>
+                                <dd>몸의 어느 곳에서나 발생<br />할 수 있는 전염성 진균 감염,<br /> 붉은 링 모양의 발진이<br /> 유발되는 질병</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-01.png" alt=""></span>
+                            <dl>
+                                <dt>지간형 무좀</dt>
+                                <dd>발가락 사이가 짓무르거나<br /> 갈라지는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-02.png" alt=""></span>
+                            <dl>
+                                <dt>소수포형 무좀</dt>
+                                <dd>발바닥에 작은물집이<br /> 잡히는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-03.png" alt=""></span>
+                            <dl>
+                                <dt>각화형 무좀</dt>
+                                <dd>발바닥에 각질이<br />두터워지는 형태</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-04.png" alt=""></span>
+                            <dl>
+                                <dt>완선</dt>
+                                <dd>전염성 진균 감염으로<br /> 사타구니 부근 (사타구니,<br /> 허벅지 및 엉덩이)의 피부에<br /> 발생하는 질병</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <span><img src="/img/bg-symptom-mo-05.png" alt=""></span>
+                            <dl>
+                                <dt>백선</dt>
+                                <dd>몸의 어느 곳에서나 발생<br />할 수 있는 전염성 진균 감염,<br /> 붉은 링 모양의 발진이<br /> 유발되는 질병</dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 무좀 치료 스타일 -->
+        <div class="section" id="care">
+            <h2 class="pc">무좀 치료, 원하는 스타일대로!<img src="img/img-pmlogo-korean.png" alt=""></h2>
+            <h2 class="mo">무좀 치료, 원하는 스타일대로!<br /><img src="img/img-pmlogo-korean.png" alt=""></h2>
+            <div class="player-wrap">
+                <div id="player"></div>
+                <div class="playlist pc">
+                    <ul>
+                        <li class="on"><a href="#" data-thumb="W4E3bElSZeg">스틱</a></li>
+                        <li><a href="#" data-thumb="mZX1p1lVLT8">크림</a></li>
+                        <li><a href="#" data-thumb="LpYBNAaqvnM">스프레이</a></li>
+                        <li><a href="#" data-thumb="NgVgW_VFpDs">에어로솔</a></li>
+                        <li><a href="#" data-thumb="NOQFierp8XY">브러쉬</a></li>
+                    </ul>
+                </div>
+                <div class="playlist mo">
+                    <ul>
+                        <li class="on"><span></span><a href="#" data-thumb="riA0RHITmr0">스틱</a></li>
+                        <li><span></span><a href="#" data-thumb="S3XalB9MGJk">크림</a></li>
+                        <li><span></span><a href="#" data-thumb="Td5co26Ud5k">스프레이</a></li>
+                        <li><span></span><a href="#" data-thumb="EhD7apHL7QE">에어로솔</a></li>
+                        <li><span></span><a href="#" data-thumb="jAbHFpaeX5Q">브러쉬</a></li>
+                    </ul>                    
+                </div>
+                <span class="pc care-people"></span>
+                <span class="pc care-tree"></span>
+                <span class="care-illust-01"></span>
+                <span class="pc care-illust-02"></span>
+                <span class="pc care-illust-03"></span>
+                <span class="care-illust-04"></span>
+            </div>
+        </div>
+
+        <!-- 피엠 제품 -->
+        <div class="section" id="menu2"> <!-- 2023.04.28 #product -> #menu2 로 변경 -->
+            <div class="product-banner-wrap">
+                <span class="care-people"></span>
+                <span class="care-illust-03"></span>
+                <h2>피엠 제품</h2>
+                <div class="product-slide-wrap">
+                    <div class="swiper product-slide">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide product1">
+                                <p class="image pc"><a href="#product1"><img src="img/img-product-01.png" alt=""></a></p>
+                                <p class="image mo"><a href="#product1"><img src="img/img-product-mo-01.png" alt=""></a></p>
+                                <p class="title">피엠외용액</p>
+                                <p class="subtitle">액체 타입의 무좀약 (50ml &amp; 70ml)</p>
+                            </div>
+                            <div class="swiper-slide product2">
+                                <p class="image pc"><a href="#product2"><img src="img/img-product-02.png" alt=""></a></p>
+                                <p class="image mo"><a href="#product2"><img src="img/img-product-mo-02.png" alt=""></a></p>
+                                <p class="title">피엠트리플크림</p>
+                                <p class="subtitle">크림 타입의 무좀약 (20g)</p>
+                            </div>
+                            <div class="swiper-slide product3">
+                                <p class="image pc"><a href="#product3"><img src="img/img-product-03.png" alt=""></a></p>
+                                <p class="image mo"><a href="#product3"><img src="img/img-product-mo-03.png" alt=""></a></p>
+                                <p class="title">피엠네일라카</p>
+                                <p class="subtitle">손발톱 무좀약 (4ml &amp; 6ml)</p>
+                            </div>
+                            <div class="swiper-slide product4">
+                                <p class="image pc"><a href="#product4"><img src="img/img-product-04.png" alt=""></a></p>
+                                <p class="image mo"><a href="#product4"><img src="img/img-product-mo-04.png" alt=""></a></p>
+                                <p class="title">피엠졸큐액</p>
+                                <p class="subtitle">스프레이 타입의 무좀약 (45ml)</p>
+                            </div>
+                            <div class="swiper-slide product5">
+                                <p class="image pc"><a href="#product5"><img src="img/img-product-05.png" alt=""></a></p>
+                                <p class="image mo"><a href="#product5"><img src="img/img-product-mo-05.png" alt=""></a></p>
+                                <p class="title">피엠쿨에어로솔</p>
+                                <p class="subtitle">가스스프레이 무좀약 (60g)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-button-next"></div>
+                    <div class="product-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section product1-wrap" id="product1">
+            <div class="product1">
+                <div class="product-info">
+                    <p class="sub-txt">간편하고 편한 무좀약</p>
+                    <h2 class="title">피엠외용액</h2>
+                    <p class="desc">질환 부위에 청량감 있게 약물을 투입으로<br />
+                        무좀 원인균 억제와 가려움증 완화
+                    </p>
+                    <ul class="symptom">
+                        <li>#무좀</li>
+                        <li>#완선(사타구니 백선)</li>
+                        <li>#체부백선</li>
+                    </ul>
+                    <p class="link pc"><a href="javascript:openPopupDim('popup1');">자세히 보기</a></p>
+                    <p class="link mo"><a href="javascript:openPopupDim('popup1');"></a></p>
+                </div>
+                <div class="product-photo">
+                    <div class="circle">
+                        <img src="img/img-product-photo-01.png" alt="" class="pc">
+                        <img src="img/img-product-photo-mo-01.png" alt="" class="mo">
+                    </div>
+                    <div class="pc tooltip">
+                        스틱 타입으로 손에 묻지 않고 빠르게<br /> 
+                        건조되어 일상생활 바로 가능<br />
+                        50mL, 70mL제품으로 타사 대비 대용량<br />
+                        각질 용해와 항진균의 2중 작용으로 재발 방지
+                    </div>
+                </div>
+                <div class="tab mo">
+                    스틱 타입으로 손에 묻지 않고 빠르게<br /> 
+                    건조되어 일상생활 바로 가능<br />
+                    50mL, 70mL제품으로 타사 대비 대용량<br />
+                    각질 용해와 항진균의 2중 작용으로<br /> 재발 방지
+                    <a href="#"><span class="hide">탭 터치</span></a>
+                </div>
+                <span class="plus"></span>
+                <span class="heart"></span>
+            </div>
+            <div class="popup popup1">
+                <div class="popup-wrap">
+                    <a href="javascript:closePopupDim('popup1');" title="팝업창 닫기 버튼" class="btn-close pc"></a>
+                    <a href="javascript:closePopupDim('popup1');" title="팝업창 닫기 버튼" class="btn-close mo"></a>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>제품명</th>
+                                <th>피엠외용액(50mL, 70mL)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>성상 및 용량</td>
+                                <td>연한 적색의 액제 / 70ml, 50ml</tr>
+                            <tr>
+                                <td>원료약품 및 분량</td>
+                                <td>L-멘톨 20mg/mL, 리도카인 20mg/mL<br />
+                                    살리실산 100mg/mL, 질산에코나졸 10mg/mL</td>
+                            </tr>
+                            <tr>
+                                <td>효능·효과</td>
+                                <td>무좀, 완선(사타구니백선), 체부백선</td>
+                            </tr>
+                            <tr>
+                                <td>용법·용량</td>
+                                <td>일 1~수회 적당량을 환부에 바른다. (1일 2~3회,<br />
+                                    3일 이내 사용하시고, 피부가 벗겨지는 증후가 나타나면<br />
+                                    사용을 중지한 후 무좀 재발 시 다시 반복사용)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>성분</th>
+                                <th>역할</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>살리실산</td>
+                                <td>각질을 용해하여 약물 침투성 강화, 항염증 작용,<br />
+                                    곰팡이 성장억제
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>에코나졸질산염</td>
+                                <td>피부사상균에 대한 항진균 작용, 가려움증 완화</td>
+                            </tr>
+                            <tr>
+                                <td>리도카인</td>
+                                <td>국소마취작용으로 통증 완화</td>
+                            </tr>
+                            <tr>
+                                <td>L-멘톨</td>
+                                <td>질환 부위에 청량감을 줌으로써 피부 자극 완화,<br />
+                                진통/가려움 완화</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetailCache?cacheSeq=201701906aupdateTs2022-12-28%2013:43:36.745792b" class="file-down mo" target="_blank">주의사항</a>
+                </div>
+                <a href="https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetailCache?cacheSeq=201701906aupdateTs2022-12-28%2013:43:36.745792b" class="file-down pc" target="_blank">주의사항</a>
+            </div>
+        </div>
+        <div class="section product2-wrap" id="product2">
+            <div class="product2">
+                <div class="product-info">
+                    <p class="sub-txt">크림타입으로 누구나 쉽고 간편하게</p>
+                    <h2 class="title">피엠트리플크림</h2>
+                    <p class="desc">항진균은 기본! 우레아 첨가로 각질연화!<br />
+                        무좀, 가려움, 각질을 한번에 시원한 쿨링감으로 상쾌하게
+                    </p>
+                    <ul class="symptom">
+                        <li>#무좀</li>
+                        <li>#완선(사타구니 백선)</li>
+                        <li>#백선</li>
+                        <li>#피부진균감염증</li>
+                    </ul>
+                    <p class="link pc"><a href="javascript:openPopupDim('popup2');">자세히 보기</a></p>
+                    <p class="link mo"><a href="javascript:openPopupDim('popup2');"></a></p>
+                </div>
+                <div class="product-photo">
+                    <div class="circle">
+                        <img src="img/img-product-photo-02.png" alt="" class="pc">
+                        <img src="img/img-product-photo-mo-02.png" alt="" class="mo">
+                    </div>
+                    <div class="tooltip pc">
+                        사용이 편리한 크림타입<br /> 
+                        효과가 빠르고 약효지속시간이 길어<br />
+                        완치기간 짧음<br />
+                        테르니나판 염산염 복합제제, 우레아 첨가
+                    </div>
+                </div>
+                <div class="tab mo">
+                    사용이 편리한 크림타입<br /> 
+                    효과가 빠르고 약효지속시간이 길어<br />
+                    완치기간 짧음<br />
+                    테르니나판 염산염 복합제제, 우레아 첨가
+                    <a href="#"><span class="hide">탭 터치</span></a>
+                </div>
+                <span class="leaf"></span>
+                <span class="hand"></span>
+                <span class="tree"></span>
+            </div>
+            <div class="popup popup2">
+                <div class="popup-wrap">
+                    <a href="javascript:closePopupDim('popup2');" title="팝업창 닫기 버튼" class="btn-close"></a>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>제품명</th>
+                                <th>피엠트리플크림</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>성상 및 용량</td>
+                                <td>흰색의 크림제 / 20g</tr>
+                            <tr>
+                                <td>원료약품 및 분량</td>
+                                <td>테르비나핀염산염 10mg/g, 우레아 50mg/g<br />
+                                    크로타미톤 50mg/g, L-멘톨 20mg/g, 에녹솔론 5mg/g</td>
+                            </tr>
+                            <tr>
+                                <td>효능·효과</td>
+                                <td>피부사상균에 의한 피부진균(곰팡이)감염증<br />
+                                    : 무좀, 완선(사타구니백선), 백선</td>
+                            </tr>
+                            <tr>
+                                <td>용법·용량</td>
+                                <td>1일 1회, 적당량을 환부(질환 부위)에 도포한다(바른다).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>성분</th>
+                                <th>역할</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>테르비나핀염산염</td>
+                                <td>Allylamine 계열로 피부사상균, 곰팡이, 진균에 대한<br />
+                                    살균작용
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>우레아</td>
+                                <td>피부를 진정시키고 각질을 용해하는 역할</td>
+                            </tr>
+                            <tr>
+                                <td>크로타미톤</td>
+                                <td>피부에 도포 시 시원한 느낌을 주어 가려움 완화</td>
+                            </tr>
+                            <tr>
+                                <td>L-멘톨</td>
+                                <td>질환 부위에 청량감을 줌으로써 피부 자극 완화,<br />
+                                진통/가려움 완화</td>
+                            </tr>
+                            <tr>
+                                <td>에녹솔론</td>
+                                <td>알러지, 피부염증 완화</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="./file/6.pdf" class="file-down mo" target="_blank">주의사항</a>
+                </div>
+                <a href="./file/6.pdf" class="file-down pc" target="_blank">주의사항</a>
+            </div>
+        </div>
+        <div class="section product3-wrap" id="product3">
+            <div class="product3">
+                <div class="product-info">
+                    <p class="sub-txt">갈거나 닦아낼 필요 없는 편리한 무좀 치료제</p>
+                    <h2 class="title">피엠네일라카</h2>
+                    <p class="desc">질환 부위에 청량감 있게 약물을 투입으로<br />
+                        무좀 원인균 억제와 가려움증 완화
+                    </p>
+                    <ul class="symptom">
+                        <li>#손톱무좀</li>
+                        <li>#발톱무좀</li>
+                        <li>#조갑진균증</li>
+                    </ul>
+                    <p class="link pc"><a href="javascript:openPopupDim('popup3');">자세히 보기</a></p>
+                    <p class="link mo"><a href="javascript:openPopupDim('popup3');"></a></p>
+                </div>
+                <div class="product-photo">
+                    <div class="circle">
+                        <img src="img/img-product-photo-03.png" alt="" class="pc">
+                        <img src="img/img-product-photo-mo-03.png" alt="" class="mo">
+                    </div>
+                    <div class="tooltip pc">
+                        습윤제 우레아 첨가로<br />
+                        손발톱을 연화시켜 빠르게 침투<br />
+                        넓은 브러쉬로 손발톱 표면에 더 쉽게 사용
+                    </div>
+                </div>
+                <div class="tab mo">
+                    습윤제 우레아 첨가로<br />
+                    손발톱을 연화시켜 빠르게 침투<br />
+                    넓은 브러쉬로 손발톱 표면에<br /> 더 쉽게 사용
+                    <a href="#"><span class="hide">탭 터치</span></a>
+                </div>
+                <span class="plus"></span>
+                <span class="nail"></span>
+                <span class="circle"></span>
+            </div>
+            <div class="popup popup3">
+                <div class="popup-wrap">
+                    <a href="javascript:closePopupDim('popup3');" title="팝업창 닫기 버튼" class="btn-close"></a>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>제품명</th>
+                                <th>피엠네일라카</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>성상 및 용량</td>
+                                <td>브러쉬가 부착된 뚜껑이 있는 유리병 안에 든 무색<br />
+                                    ~ 엷은 황색의 투명한 액제 / 4mL, 6mL</tr>
+                            <tr>
+                                <td>원료약품 및 분량</td>
+                                <td>시클로피록스 80mg/g</td>
+                            </tr>
+                            <tr>
+                                <td>효능·효과</td>
+                                <td>조갑진균증 (손, 발톱무좀)</td>
+                            </tr>
+                            <tr>
+                                <td>용법·용량</td>
+                                <td>손발을 씻고 건조시킨 후 하루에 한번 얇은 막이<br /> 
+                                    형성되도록 환부에 바른다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>성분</th>
+                                <th>역할</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>시클로피록스</td>
+                                <td>항염증 작용, 피부사상균 억제, 진균(곰팡이)의 일종인<br />
+                                    칸디다 억제</td>
+                            </tr>
+                            <tr>
+                                <td>우레아(습윤제)</td>
+                                <td>피부를 진정시키고 각질을 용해하는 역할</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="./file/5.pdf" target="_blank" class="file-down mo">주의사항</a>
+                </div>
+                <a href="./file/5.pdf" target="_blank" class="file-down pc">주의사항</a>
+            </div>
+        </div>
+        <div class="section product4-wrap" id="product4">
+            <div class="product4">
+                <div class="product-info">
+                    <p class="sub-txt">간편하게 뿌리는 무좀 치료제</p>
+                    <h2 class="title">피엠졸큐액</h2>
+                    <p class="desc">손대지 않고 깨끗하게 무좀원인균을 제거하며<br />
+                        통증 완화와 시원한 쿨링 사용감
+                    </p>
+                    <ul class="symptom">
+                        <li>#무좀</li>
+                        <li>#완선(사타구니 백선)</li>
+                        <li>#체부백선</li>
+                    </ul>
+                    <p class="link pc"><a href="javascript:openPopupDim('popup4');">자세히 보기</a></p>
+                    <p class="link mo"><a href="javascript:openPopupDim('popup4');"></a></p>
+                </div>
+                <div class="product-photo">
+                    <div class="circle">
+                        <img src="img/img-product-photo-04.png" alt="" class="pc">
+                        <img src="img/img-product-photo-mo-04.png" alt="" class="mo">
+                    </div>
+                    <div class="tooltip pc">
+                        스프레이 타입으로 손대지 않고 깨끗하게<br />
+                        스타킹을 신은 채로 가능<br />
+                        <span>시원한 쿨링 사용감</span>
+                    </div>
+                </div>
+                <div class="tab mo">
+                    스프레이 타입으로 손대지 않고 깨끗하게<br />
+                    스타킹을 신은 채로 가능<br />
+                    <span>시원한 쿨링 사용감</span>
+                    <a href="#"><span class="hide">탭 터치</span></a>
+                </div>
+                <span class="leaf"></span>
+                <span class="dashed-line"></span>
+                <span class="pc circle"></span>
+                <span class="pc tree"></span>
+            </div>
+            <div class="popup popup4 ">
+                <div class="popup-wrap">
+                    <a href="javascript:closePopupDim('popup4');" title="팝업창 닫기 버튼" class="btn-close"></a>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>제품명</th>
+                                <th>피엠졸큐액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>성상 및 용량</td>
+                                <td>무색의 방향이 있는 맑은액 / 45mL</tr>
+                            <tr>
+                                <td>원료약품 및 분량</td>
+                                <td>L-멘톨 1g/100mL, 리도카인 2g/100mL<br />
+                                    크로타미톤 5g/100mL, 클로트리마졸 10mg/mL</td>
+                            </tr>
+                            <tr>
+                                <td>효능·효과</td>
+                                <td>무좀, 완선(사타구니백선), 체부백선</td>
+                            </tr>
+                            <tr>
+                                <td>용법·용량</td>
+                                <td>1일 2~3회 적당량을 환부(질환 부위)에 바른다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>성분</th>
+                                <th>역할</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>클로트리마졸</td>
+                                <td>진균(곰팡이)에 의한 감염을 치료하는 항진균제</td>
+                            </tr>
+                            <tr>
+                                <td>리도카인</td>
+                                <td>국소마취작용으로 통증 완화</td>
+                            </tr>
+                            <tr>
+                                <td>크로타미톤</td>
+                                <td>피부에 도포 시 시원한 느낌을 주어 가려움 완화</td>
+                            </tr>
+                            <tr>
+                                <td>L-멘톨</td>
+                                <td>질환 부위에 청량감을 줌으로써 피부 자극 완화,<br /> 진통/가려움 완화</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="./file/7.pdf"  target="_blank" class="file-down mo">주의사항</a>
+                </div>
+                <a href="./file/7.pdf"  target="_blank" class="file-down pc">주의사항</a>
+            </div>
+        </div>
+        <div class="section product5-wrap" id="product5">
+            <div class="product5">
+                <div class="product-info">
+                    <p class="sub-txt">위생적이고 간편한 무좀치료제</p>
+                    <h2 class="title">피엠쿨에어로솔</h2>
+                    <p class="desc">피부가려움과 염증 완화 그리고 진통효과까지<br />
+                        광범위 무좀 원인균 억제                        
+                    </p>
+                    <ul class="symptom">
+                        <li>#무좀</li>
+                        <li>#완선(사타구니백선)</li>
+                        <li>#백선</li>
+                    </ul>
+                    <p class="link pc"><a href="javascript:openPopupDim('popup5');">자세히 보기</a></p>
+                    <p class="link mo"><a href="javascript:openPopupDim('popup5');">자세히 보기</a></p>
+                </div>
+                <div class="product-photo">
+                    <div class="circle">
+                        <img src="img/img-product-photo-05.png" alt="" class="pc">
+                        <img src="img/img-product-photo-mo-05.png" alt="" class="mo">
+                    </div>
+                    <div class="tooltip pc">
+                        UP- DOWN 밸브사용으로 거꾸로 분사 가능<br />
+                        <span>
+                            가스 스프레이로 간편하게 광범위적인<br />
+                            환부를 위생적으로!
+                        </span>
+                    </div>
+                </div>
+                <div class="tab mo">
+                    UP- DOWN 밸브사용으로<br /> 거꾸로 분사 가능<br />
+                    <span>
+                        가스 스프레이로 간편하게<br />
+                        광범위적인 환부를 위생적으로!
+                    </span>
+                    <a href="#"><span class="hide">탭 터치</span></a>
+                </div>
+                <span class="plus1"></span>
+                <span class="plus2"></span>
+                <span class="spray"></span>
+            </div>
+            <div class="popup popup5">
+                <div class="popup-wrap">
+                    <a href="javascript:closePopupDim('popup5');" title="팝업창 닫기 버튼" class="btn-close"></a>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>제품명</th>
+                                <th>피엠쿨에어로솔</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>성상 및 용량</td>
+                                <td>무색 내지 미황색(연노랑)의 액제며 내압용기에<br >
+                                    충진(채움)한 에어로솔제 / 60g</tr>
+                            <tr>
+                                <td>원료약품 및 분량</td>
+                                <td>디펜히드라민 4mg/g, 테르비나핀염산염 4mg/g<br />
+                                    리도카인 8mg/g, 에녹솔론 0.4mg/g</td>
+                            </tr>
+                            <tr>
+                                <td>효능·효과</td>
+                                <td>무좀, 완선(사타구니백선), 백선</td>
+                            </tr>
+                            <tr>
+                                <td>용법·용량</td>
+                                <td>적용 전에 환부(질환부위)를 깨끗이 씻고<br />
+                                    완전히 건조 시킨 후 1일 1회 적당량 뿌린다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:75%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>성분</th>
+                                <th>역할</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>테르비나핀염산염</td>
+                                <td>Allylamine 계열로 피부사상균, 곰팡이, 진균에 대한<br />
+                                    살균작용</td>
+                            </tr>
+                            <tr>
+                                <td>리도카인</td>
+                                <td>국소마취작용으로 통증 완화</td>
+                            </tr>
+                            <tr>
+                                <td>디펜히드라민</td>
+                                <td>피부 가려움 완화</td>
+                            </tr>
+                            <tr>
+                                <td>에녹솔론</td>
+                                <td>염증 완화, 진통효과</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="./file/8.pdf" target="_blank" class="file-down mo">주의사항</a>
+                </div>
+                <a href="./file/8.pdf" target="_blank" class="file-down pc">주의사항</a>
+            </div>
+        </div>
+        <div class="section qna-wrap" id="menu3"> <!-- 2023.04.28 #qna -> #menu3 로 변경 -->
+            <h2>피엠 Q&amp;A</h2>
+            <div class="qna">
+                <ul class="pc">
+                    <li>Q. 피엠외용액을 발랐는데 허물이 벗겨졌어요. 괜찮은 건가요?
+                        <ul>
+                            <li>
+                                네, 피엠외용액에는 각질을 제거하는 살리실산이 함유되어있는데.<br />
+                                살리실산은 각질층을 녹여 무좀균을 제거하기 용이하게 하는 작용을 합니다.<br />
+                                따라서 피엠외용액 사용 후 허물이 벗겨지는 것은 감염된 각질층을 녹여 무좀균을 제거하는 과정으로, 정상적인 반응입니다.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Q. 임신이나 수유 중에 제품을 사용해도 되나요?
+                        <ul>
+                            <li>
+                                ① 피엠외용액 : 임산부의 경우, 도포제는 경구약제에 비해 전신적인 흡수가 미미하지만 피부과 전문의와 상담 후 사용 여부를 결정하시기 바랍니다.<br />
+                                임신한 여성의 몸에는 여러 면역체계의 변화가 생기므로 임신 전에 미리 무좀 등과 같은 감염질환을 치료하는 것이 중요합니다.<br />
+                                또한 배우자(남편)가 무좀을 가진 경우에도 치료하도록 조치해야 합니다<br />
+                                · 수유부의 경우, 제품 도포 후 3~4시간 후 수유 가능합니다.<br />
+                                ② 피엠졸큐액 : 사용 전 반드시 전문의와 상의 후 제품을 사용하시기 바랍니다.<br />
+                                ③ 피엠트리플크림 : 임산부, 수유부 사용 불가합니다.<br />
+                                ④ 피엠쿨크림 : 임산부, 수유부 사용 불가합니다.<br />
+                                ⑤ 피엠네일라카 : 피엠네일라카는 임상시험결과 임산부나 수유부에 대한 충분한 임상경험이 없습니다.<br />
+                                하지만 질환이 심각하여 제품을 사용해야 하는 경우, 반드시 전문의와 상의 후 제품을 사용할 것을 권장합니다.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="mo">
+                    <li>Q. 피엠외용액을 발랐는데 허물이 벗겨졌어요.<br /> 괜찮은 건가요?
+                        <ul>
+                            <li>
+                                네, 피엠외용액에는 각질을 제거하는 살리실산이 함유되어있는데. 따라서 피엠외용액 사용 후 허물이 벗겨지는 것은 감염된 각질층을 녹여 무좀균을 제거하는 과정으로, 정상적인 반응입니다.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Q. 임신이나 수유 중에 제품을 사용해도 되나요?
+                        <ul>
+                            <li>
+                                ① 피엠외용액 : 임산부의 경우, 도포제는 경구약제에 비해 전신적인 흡수가 미미하지만 피부과 전문의와 상담 후 사용 여부를 결정하시기 바랍니다. 
+                                임신한 여성의 몸에는 여러 면역체계의 변화가 생기므로 임신 전에 미리 무좀 등과 같은 감염질환을 치료하는 것이 중요합니다. 
+                                또한 배우자(남편)가 무좀을 가진 경우에도 치료하도록 조치해야 합니다.<br />
+                                · 수유부의 경우, 제품 도포 후 3~4시간 후 수유 가능합니다.<br />
+                                ② 피엠졸큐액 : 사용 전 반드시 전문의와 상의 후 제품을<br /> 사용하시기 바랍니다.<br />
+                                ③ 피엠트리플크림 : 임산부, 수유부 사용 불가합니다.<br />
+                                ④ 피엠쿨크림 : 임산부, 수유부 사용 불가합니다.<br />
+                                ⑤ 피엠네일라카 : 피엠네일라카는 임상시험결과 임산부나 수유부에<br /> 대한 충분한 임상경험이 없습니다.<br />
+                                하지만 질환이 심각하여 제품을 사용해야 하는 경우, 반드시 전문의와<br />상의 후 제품을 사용할 것을 권장합니다.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <span class="qna-people1"></span>
+            <span class="qna-people2"></span>
+            <span class="pc qna-tree"></span>            
+        </div>
+    </main>
+    <div class="popup500 popup-terms">
+        <a href="javascript:closePopupDim('popup-terms');" title="팝업창 닫기 버튼" class="btn-close"></a>
+        <div class="popup-terms-wrap">
+            <h2>이용약관</h2>
+            <div class="terms-box y-scroll">
+                <strong>제1조. 목적</strong>
+                <p>
+                    <span>
+                        1. 이용자는 본 약관에 따라 당 사이트가 제공하는 서비스를 받는 자를
+                        말하며 경남제약㈜(www.kyungnampharm.com) 이하 “회사”라 함.
+                    </span>
+                    이용자 약관은 이용자가 회사에서 제공하는 인터넷 관련 서비스를
+                    이용함에 있어 이용자와 회사의 권리 및 의무를 규정함을 목적으로 합니다.
+                    이용자 약관은 이용자가 회사에서 제공하는 인터넷 관련 서비스를
+                    이용함에 있어 이용자와 회사의 권리 및 의무를 규정함을 목적으로 합니다.
+                </p>
+                <strong>제2조. 이용 약관 변경</strong>
+                <p>
+                    1. 회사는 필요할 경우 약관을 수정하거나 변경할 수 있습니다.
+                    약관이 변경되는 경우 회사는 약관의 변경 내용 및 사유를 시행 10일 전
+                    (이용자에게 불리하거나 중대한 사항의 변경은 30일 전)에 회사 대표사이트에
+                    변경 약관을 공지합니다.
+                </p>
+                <p>
+                    2. 이용자가 변경된 약관의 효력 발생일까지 약관 변경에 대한 거부의사를
+                    명시적으로 표시하지 않거나 약관 변경 이후에 서비스를 이용할 경우 변경된
+                    약관에 동의한 것으로 봅니다. 이용자가 변경된 약관에 동의하지 않는 경우,
+                    회사의 대표사이트가 제공하는 서비스 이용이 제한되거나 정지될 수 있습니다.
+                </p>
+                <strong>제3조. 저작권</strong>
+                <p>
+                    1. 회사 홈페이지에서 제공하는 각종 서비스에 대한 정보를 사전 동의 없이
+                    외부로 유출시켰을 경우, 저작권법에 의해 법적 효력이 미칠 수 있습니다.
+                </p>
+                <p>
+                    2. 회사 홈페이지에 등록되어 있는 회사 로고, 캐릭터 등 상표권법에 의해
+                    보호받고 있는 이미지 파일을 무단으로 사용하실 수 없으며,
+                    위반사항 적발 시 법적 효력이 발생합니다.
+                </p>
+                <strong>제4조. 서비스 이용</strong>
+                <p>
+                    1. 서비스는 회사의 업무상 기술상 특별한 지장이 없는 한 연중무휴,
+                    1일 24시간을 원칙으로 합니다.
+                </p>
+                <p>
+                    2. 제1항의 이용시간은 정기 점검 등의 필요로 인하여 회사가 정한 날과
+                    시간에는 예외로 합니다. 컴퓨터 등 정보통신설비의 보수점검, 교체 및 고장,
+                    통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로
+                    중단할 수 있고, 새로운 서비스로의 교체 기타 회사가 적절하다고 판단하는
+                    사유에 기하여 현재 제공되는 서비스를 완전히 중단할 수 있습니다.
+                </p>
+                <p>
+                    3. 제 2항에 의한 서비스 중단의 경우에는 홈페이지 게시판에 게시하여
+                    이용자에게 통지합니다. 다만 회사가 통제할 수 없는 사유로 인한 서비스의
+                    중단(시스템 관리자의 고의, 과실이 없는 디스크 장애, 시스템 다운 등)으로
+                    인하여 사전 통지가 불가능한 경우에는 그러하지 않습니다.
+                </p>
+                <strong>제5조. 회사의 의무</strong>
+                <p>
+                    1. 회사는 법령과 본 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며
+                    본 약관이 정하는 바에 따라 지속적이고, 안정적으로 서비스를 제공하기
+                    위해서 노력합니다.
+                </p>
+                <p>
+                    2. 회사는 이용자의 개인신상정보를 본인의 승낙 없이 타인에게 누설,
+                    배포하여서는 안됩니다. 다만 전기통신관련법령 등 관계법령에 의하여 관계
+                    국가기관 등의 요구가 있는 경우에는 예외로 합니다.
+                </p>
+                <p>
+                    3. 회사는 이용자로부터 제기되는 의견이나 불만이 정당하다고 인정할
+                    경우에는 즉시 처리합니다. 다만, 즉시 처리가 곤란한 경우에는 이용자에게
+                    그 사유와 처리일정을 통보합니다.
+                </p>
+                <strong>제6조. 기타사항 (명기되지 않은 사항)</strong>
+                <p>
+                    1. 본 약관은 특별한 사유발생 시 수정될 수 있으며, 이 경우
+                    회사 홈페이지를 통해 사전 공지됩니다.
+                </p>
+                <strong>제7조. 약관위반 시 책임</strong>
+                <p>
+                    1. 이 약관을 위반함으로써 발생하는 모든 책임은 위반한 자가 부담하며,
+                    이로 인하여 상대방에게 손해를 입힌 경우에는 관계법령에 의거하여
+                    법적 책임을 져야 합니다.
+                </p>
+                <p>2. 약관에 따른 소송은 회사 소재지를 관할하는 법원으로 합니다.</p>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="footer-wrap">
+            <div class="util">
+                <div class="company-logo"><a href="http://www.kyungnampharm.com" title="경남제약 사이트 바로가기"><span class="hide">경남제약 로고</span></a></div>
+                <p class="terms pc"><a href="javascript:popupWindow()">이용약관</a></p>
+                <p class="terms mo"><a href="javascript:openPopupDim('popup-terms');">이용약관</a></p>
+                <ul class="sns">
+                    <li><a href="https://www.youtube.com/user/lemona2014" title="유튜브 바로가기" target="_blank"><span class="hide">유튜브</span></a></li>
+                    <li><a href="https://www.instagram.com/lemona_official/" title="인스타그램 바로가기" target="_blank"><span class="hide">인스타그램</span></a></li>
+                    <li><a href="https://www.facebook.com/kyungnampharm" title="페이스북 바로가기" target="_blank"><span class="hide">페이스북</span></a></li>
+                </ul>
+            </div>
+            <div class="info pc">
+                <dl>
+                    <dt>경남제약(주)</dt>
+                    <dd>국내영업 문의 02-3490-5142, 5143 | 해외영업 문의 : 02-3490-5160 | 광고문의 <a href="mailto:mkt123@knpharm.co.kr">mkt123@knpharm.co.kr</a></dd>
+                </dl>
+                <p class="customer-center">소비자상담<br><span>080-232-8600</span></p>
+                <address>
+                    <span>[서울] 서울시 강남구 언주로 702(논현동, 라이브플렉스타워) 6, 7, 8, 11층</span><br />
+                    <span>[본사] 경상남도 의령군 의령읍 구룡로4남길 79</span>
+                </address>
+                <select name="family-site" id="family-site" class="family-site pc" onchange="window.open(value, '_blank');">
+                    <option value="">FAMILY SITE</option>
+                    <option value="http://www.kyungnampharm.com">경남제약</option>
+                    <option value="https://smartstore.naver.com/live-care">라이브케어</option>
+                    <option value="http://www.jaha-placenta.co.kr">자하생력</option>
+                    <option value="http://www.minol.co.kr">미놀</option>
+                    <option value="http://www.pm-solution.co.kr/">피엠</option>
+                </select>
+                <p class="copyright">&copy;2018 KYUNG NAM PHARM CO., LTD. ALL RIGHTS RESERVED.</p>
+            </div>
+            <div class="info mo">
+                <p class="customer-center">소비자상담<br><span>080-232-8600</span></p>
+                <dl>
+                    <dt>경남제약(주)</dt>
+                    <dd>국내영업 문의 02-3490-5142, 5143<br />해외영업 문의 : 02-3490-5160 | 광고문의 <a href="mailto:mkt123@knpharm.co.kr">mkt123@knpharm.co.kr</a></dd>
+                </dl>
+                <address>
+                    <span>[서울] 서울시 강남구 언주로 702, 7층(논현동, 라이브플렉스타워)</span><br />
+                    <span>[본사] 경상남도 의령군 의령읍 구룡로4남길 79</span>
+                </address>
+                <select name="family-site" id="family-site" class="family-site pc" onchange="window.open(value, '_blank');">
+                    <option value="">FAMILY SITE</option>
+                    <option value="http://www.kyungnampharm.com">경남제약</option>
+                    <option value="https://smartstore.naver.com/live-care">라이브케어</option>
+                    <option value="http://www.jaha-placenta.co.kr">자하생력</option>
+                    <option value="http://www.minol.co.kr">미놀</option>
+                    <option value="http://www.pm-solution.co.kr/">피엠</option>
+                </select>
+                <p class="copyright pc">&copy;2018 KYUNG NAM PHARM CO., LTD. ALL RIGHTS RESERVED.</p>
+            </div>
+    </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</body>
+</html>

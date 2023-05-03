@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/ScrollToPlugin.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js'></script>
+    <script src="js/pharmacy.js"></script>
+    <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6qgarl45xg&callback=initMap"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/pm.css"> 
+    <title>대한민국 무좀약 피엠</title>
+</head>
+<body>
+    <div class="dim"></div>
+    <!-- // 모바일 메뉴, 팝업 활성화 시 배경 어둡게 처리 -->
+    <header id="headerMenu">
+        <div class="header-wrap">
+            <h1 class="pc"><a href="index.html#main"><img src="img/logo.png" alt="PM 로고"></a></h1>
+            <h1 class="mo"><a href="index.html#main"><img src="img/mo-logo.png" alt="PM 로고"></a></h1>
+            <nav>
+                <div class="btn-menu-close mo">
+                    <img src="img/btn-menu-close.png" alt="메뉴 닫기버튼">
+                </div>
+                <div class="mo-menu-head mo">
+                    <img src="img/mo-logo.png" alt="PM 로고">
+                </div>
+                <!-- 2023.04.28 메뉴 링크변경 -->
+                <ul>
+                    <li><a href="index.html#menu1">브랜드 스토리</a></li>
+                    <li><a href="index.html#menu2">피엠</a></li>
+                    <li><a href="index.html#menu3">Q&amp;A</a></li>
+                </ul>
+                <p><a href="find_pharmarcy.html">약국찾기</a></p>
+            </nav>
+        </div>
+        <div class="btn-menu-open mo">
+            <img src="img/btn-menu-open.png" alt="메뉴 열기버튼">
+        </div>
+    </header>
+	<div class="pharmacy-wrap">
+        <h2>주변 약국 찾기</h2>
+        <div class="pharmacy">
+            <form>
+                <div class="select-wrap">
+                    <select name="brand" id="brand">
+                        <option value="">브랜드</option>
+                        <option value="">피엠</option>
+                        <option value="">미놀</option>
+                        <option value="">자하생력</option>
+                    </select>
+                    <select name="product" id="product">
+                        <option value="">제품</option>
+                        <option value="">제품1</option>
+                        <option value="">제품2</option>
+                        <option value="">제품3</option>
+                    </select>
+                </div>
+                <div class="location-wrap">
+                    <div class="location">
+                        <button>내 집 근처 찾기</button>
+                        <button>주소로 찾기</button>
+                    </div>
+                    <div class="distance">
+                        <button>1km</button>
+                        <button>3km</button>
+                        <button>5km</button>
+                    </div>
+                    <div class="juso">
+                        <input type="text" value="상세주소" readonly>
+                        <button>1km</button>
+                        <button>3km</button>
+                        <button>5km</button>
+                    </div>
+                </div>
+            </form>
+            <div id="map"></div> <!-- 디자인상에는 숨겨져 있습니다. -->
+        </div>
+       
+        <script type="text/javascript">
+            var map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.5666805, 126.9784147),
+                zoom: 15,
+                minZoom: 7,
+                zoomControl: true,
+                zoomControlOptions: {
+                    position: naver.maps.Position.TOP_RIGHT
+                },
+                mapTypeId: naver.maps.MapTypeId.NORMAL
+            });
+            var infowindow = new naver.maps.InfoWindow();
+            
+            function onSuccessGeolocation(position) {
+                var location = new naver.maps.LatLng(position.coords.latitude,
+                                                    position.coords.longitude);
+                map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
+                // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
+                // infowindow.open(map, location);
+                // console.log('Coordinates: ' + location.toString());
+                var marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                map: map
+                });
+            }
+
+            function onErrorGeolocation() {
+                var center = map.getCenter();
+                // infowindow.setContent('<div style="padding:20px;">' +
+                //     '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+                // infowindow.open(map, center);
+            }
+            
+            $(window).on("load", function() {
+                // 네이버 현위치 지도 호출
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+                } else {
+                    var center = map.getCenter();
+                    // infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
+                    // infowindow.open(map, center);
+                }
+            });
+        </script>
+	</div>
+    <div class="popup500 popup-terms">
+        <a href="javascript:closePopupDim('popup-terms');" title="팝업창 닫기 버튼" class="btn-close"></a>
+        <div class="popup-terms-wrap">
+            <h2>이용약관</h2>
+            <div class="terms-box y-scroll">
+                <strong>제1조. 목적</strong>
+                <p>
+                    <span>
+                        1. 이용자는 본 약관에 따라 당 사이트가 제공하는 서비스를 받는 자를
+                        말하며 경남제약㈜(www.kyungnampharm.com) 이하 “회사”라 함.
+                    </span>
+                    이용자 약관은 이용자가 회사에서 제공하는 인터넷 관련 서비스를
+                    이용함에 있어 이용자와 회사의 권리 및 의무를 규정함을 목적으로 합니다.
+                    이용자 약관은 이용자가 회사에서 제공하는 인터넷 관련 서비스를
+                    이용함에 있어 이용자와 회사의 권리 및 의무를 규정함을 목적으로 합니다.
+                </p>
+                <strong>제2조. 이용 약관 변경</strong>
+                <p>
+                    1. 회사는 필요할 경우 약관을 수정하거나 변경할 수 있습니다.
+                    약관이 변경되는 경우 회사는 약관의 변경 내용 및 사유를 시행 10일 전
+                    (이용자에게 불리하거나 중대한 사항의 변경은 30일 전)에 회사 대표사이트에
+                    변경 약관을 공지합니다.
+                </p>
+                <p>
+                    2. 이용자가 변경된 약관의 효력 발생일까지 약관 변경에 대한 거부의사를
+                    명시적으로 표시하지 않거나 약관 변경 이후에 서비스를 이용할 경우 변경된
+                    약관에 동의한 것으로 봅니다. 이용자가 변경된 약관에 동의하지 않는 경우,
+                    회사의 대표사이트가 제공하는 서비스 이용이 제한되거나 정지될 수 있습니다.
+                </p>
+                <strong>제3조. 저작권</strong>
+                <p>
+                    1. 회사 홈페이지에서 제공하는 각종 서비스에 대한 정보를 사전 동의 없이
+                    외부로 유출시켰을 경우, 저작권법에 의해 법적 효력이 미칠 수 있습니다.
+                </p>
+                <p>
+                    2. 회사 홈페이지에 등록되어 있는 회사 로고, 캐릭터 등 상표권법에 의해
+                    보호받고 있는 이미지 파일을 무단으로 사용하실 수 없으며,
+                    위반사항 적발 시 법적 효력이 발생합니다.
+                </p>
+                <strong>제4조. 서비스 이용</strong>
+                <p>
+                    1. 서비스는 회사의 업무상 기술상 특별한 지장이 없는 한 연중무휴,
+                    1일 24시간을 원칙으로 합니다.
+                </p>
+                <p>
+                    2. 제1항의 이용시간은 정기 점검 등의 필요로 인하여 회사가 정한 날과
+                    시간에는 예외로 합니다. 컴퓨터 등 정보통신설비의 보수점검, 교체 및 고장,
+                    통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로
+                    중단할 수 있고, 새로운 서비스로의 교체 기타 회사가 적절하다고 판단하는
+                    사유에 기하여 현재 제공되는 서비스를 완전히 중단할 수 있습니다.
+                </p>
+                <p>
+                    3. 제 2항에 의한 서비스 중단의 경우에는 홈페이지 게시판에 게시하여
+                    이용자에게 통지합니다. 다만 회사가 통제할 수 없는 사유로 인한 서비스의
+                    중단(시스템 관리자의 고의, 과실이 없는 디스크 장애, 시스템 다운 등)으로
+                    인하여 사전 통지가 불가능한 경우에는 그러하지 않습니다.
+                </p>
+                <strong>제5조. 회사의 의무</strong>
+                <p>
+                    1. 회사는 법령과 본 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며
+                    본 약관이 정하는 바에 따라 지속적이고, 안정적으로 서비스를 제공하기
+                    위해서 노력합니다.
+                </p>
+                <p>
+                    2. 회사는 이용자의 개인신상정보를 본인의 승낙 없이 타인에게 누설,
+                    배포하여서는 안됩니다. 다만 전기통신관련법령 등 관계법령에 의하여 관계
+                    국가기관 등의 요구가 있는 경우에는 예외로 합니다.
+                </p>
+                <p>
+                    3. 회사는 이용자로부터 제기되는 의견이나 불만이 정당하다고 인정할
+                    경우에는 즉시 처리합니다. 다만, 즉시 처리가 곤란한 경우에는 이용자에게
+                    그 사유와 처리일정을 통보합니다.
+                </p>
+                <strong>제6조. 기타사항 (명기되지 않은 사항)</strong>
+                <p>
+                    1. 본 약관은 특별한 사유발생 시 수정될 수 있으며, 이 경우
+                    회사 홈페이지를 통해 사전 공지됩니다.
+                </p>
+                <strong>제7조. 약관위반 시 책임</strong>
+                <p>
+                    1. 이 약관을 위반함으로써 발생하는 모든 책임은 위반한 자가 부담하며,
+                    이로 인하여 상대방에게 손해를 입힌 경우에는 관계법령에 의거하여
+                    법적 책임을 져야 합니다.
+                </p>
+                <p>2. 약관에 따른 소송은 회사 소재지를 관할하는 법원으로 합니다.</p>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="footer-wrap">
+            <div class="util">
+                <div class="company-logo"><a href="http://www.kyungnampharm.com" title="경남제약 사이트 바로가기"><span class="hide">경남제약 로고</span></a></div>
+                <p class="terms pc"><a href="javascript:popupWindow()">이용약관</a></p>
+                <p class="terms mo"><a href="javascript:openPopupDim('popup-terms');">이용약관</a></p>
+                <ul class="sns">
+                    <li><a href="https://www.youtube.com/user/lemona2014" title="유튜브 바로가기" target="_blank"><span class="hide">유튜브</span></a></li>
+                    <li><a href="https://www.instagram.com/lemona_official/" title="인스타그램 바로가기" target="_blank"><span class="hide">인스타그램</span></a></li>
+                    <li><a href="https://www.facebook.com/kyungnampharm" title="페이스북 바로가기" target="_blank"><span class="hide">페이스북</span></a></li>
+                </ul>
+            </div>
+            <div class="info pc">
+                <dl>
+                    <dt>경남제약(주)</dt>
+                    <dd>국내영업 문의 02-3490-5142, 5143 | 해외영업 문의 : 02-3490-5160 | 광고문의 <a href="mailto:mkt123@knpharm.co.kr">mkt123@knpharm.co.kr</a></dd>
+                </dl>
+                <p class="customer-center">소비자상담<br><span>080-232-8600</span></p>
+                <address>
+                    <span>[서울] 서울시 강남구 언주로 702(논현동, 라이브플렉스타워) 6, 7, 8, 11층</span><br />
+                    <span>[본사] 경상남도 의령군 의령읍 구룡로4남길 79</span>
+                </address>
+                <select name="family-site" id="family-site" class="family-site pc" onchange="window.open(value, '_blank');">
+                    <option value="">FAMILY SITE</option>
+                    <option value="http://www.kyungnampharm.com">경남제약</option>
+                    <option value="https://smartstore.naver.com/live-care">라이브케어</option>
+                    <option value="http://www.jaha-placenta.co.kr">자하생력</option>
+                    <option value="http://www.minol.co.kr">미놀</option>
+                    <option value="http://www.pm-solution.co.kr/">피엠</option>
+                </select>
+                <p class="copyright">&copy;2018 KYUNG NAM PHARM CO., LTD. ALL RIGHTS RESERVED.</p>
+            </div>
+            <div class="info mo">
+                <p class="customer-center">소비자상담<br><span>080-232-8600</span></p>
+                <dl>
+                    <dt>경남제약(주)</dt>
+                    <dd>국내영업 문의 02-3490-5142, 5143<br />해외영업 문의 : 02-3490-5160 | 광고문의 <a href="mailto:mkt123@knpharm.co.kr">mkt123@knpharm.co.kr</a></dd>
+                </dl>
+                <address>
+                    <span>[서울] 서울시 강남구 언주로 702, 7층(논현동, 라이브플렉스타워)</span><br />
+                    <span>[본사] 경상남도 의령군 의령읍 구룡로4남길 79</span>
+                </address>
+                <select name="family-site" id="family-site" class="family-site pc" onchange="window.open(value, '_blank');">
+                    <option value="">FAMILY SITE</option>
+                    <option value="http://www.kyungnampharm.com">경남제약</option>
+                    <option value="https://smartstore.naver.com/live-care">라이브케어</option>
+                    <option value="http://www.jaha-placenta.co.kr">자하생력</option>
+                    <option value="http://www.minol.co.kr">미놀</option>
+                    <option value="http://www.pm-solution.co.kr/">피엠</option>
+                </select>
+                <p class="copyright pc">&copy;2018 KYUNG NAM PHARM CO., LTD. ALL RIGHTS RESERVED.</p>
+            </div>
+    </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</body>
+</html>

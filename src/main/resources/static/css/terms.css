@@ -1,0 +1,44 @@
+@import url("reset.css");
+
+/* 이용약관 */
+.popup-terms-wrap {
+    position: relative;
+    width:100%;
+    height:100%;
+    padding:0;
+    background: #fff;
+}
+.popup-terms-wrap .terms-box {
+    height:100%;
+    padding:10px 20px 10px 10px;
+    overflow:hidden;
+    overflow-y:scroll;
+    line-height: 140%;
+    font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: -1px;
+    text-align: justify;
+}
+.popup-terms-wrap .terms-box strong {
+    margin:10px 0 3px 0;
+    display: inline-block;
+    color:#333;
+    font-weight: bold;
+}
+.popup-terms-wrap .terms-box p {
+    margin:5px 0;
+    font-size:14px;
+}
+.popup-terms-wrap .terms-box p span {
+    letter-spacing: -1.2px;
+}
+.popup-terms-wrap h2 {
+    width:100%;
+    margin:0;
+    padding:15px 0 10px 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:20px;
+    text-align: left;
+    letter-spacing: -1px;
+    color:#000;
+    border-bottom:1px #ccc solid;
+}
