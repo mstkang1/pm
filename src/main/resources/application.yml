@@ -5,8 +5,8 @@ server:
     uri-encoding: UTF-8
 
 mybatis:
-    type-aliases-package: com.knpharm.minol.domain
-    mapper-locations: mybatis/mapper/**/*.xml
+  type-aliases-package: com.knpharm.pm.domain
+  mapper-locations: mybatis/mapper/**/*.xml
 
 # Thymleaf
 spring:
