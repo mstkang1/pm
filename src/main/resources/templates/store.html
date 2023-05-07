@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="/css/pm.css">
 
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bsj7qymjt7"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l2o6xz5abj&submodules=geocoder"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
     <title>대한민국 무좀약 피엠</title>
 </head>
 <body>
@@ -51,41 +53,43 @@
         <form>
             <div class="select-wrap">
                 <select name="brand" id="brand">
-                    <option value="">브랜드</option>
-                    <option value="">피엠</option>
-                    <option value="">미놀</option>
-                    <option value="">자하생력</option>
+                    <!--<option value="">브랜드</option>-->
+                    <option value="P" selected>피엠</option>
+                    <option value="J">자하생력</option>
+                    <option value="M">미놀</option>
                 </select>
                 <select name="product" id="product">
-                    <option value="">제품</option>
-                    <option value="">제품1</option>
-                    <option value="">제품2</option>
-                    <option value="">제품3</option>
+                    <!--<option value="">제품</option>-->
                 </select>
             </div>
             <div class="location-wrap">
                 <div class="location">
-                    <button>내 집 근처 찾기</button>
-                    <button>주소로 찾기</button>
+                    <button value="myplace">내 집 근처 찾기</button>
+                    <button value="juso">주소로 찾기</button>
                 </div>
                 <div class="distance">
-                    <button>1km</button>
-                    <button>3km</button>
-                    <button>5km</button>
+                    <button value="1">1km</button>
+                    <button value="3">3km</button>
+                    <button value="5">5km</button>
                 </div>
                 <div class="juso">
-                    <input type="text" value="상세주소" readonly>
-                    <button>1km</button>
-                    <button>3km</button>
-                    <button>5km</button>
+                    <input type="text" id="address" readonly>
+                    <button value="1">1km</button>
+                    <button value="3">3km</button>
+                    <button value="5">5km</button>
                 </div>
             </div>
         </form>
         <div id="map"></div> <!-- 디자인상에는 숨겨져 있습니다. -->
+        <input type="hidden" id="latitude">
+        <input type="hidden" id="longitude">
+        <input type="hidden" id="distance" value="">
+        <input type="hidden" id="location" value="myplace">
     </div>
 
     <script type="text/javascript">
-        var map = new naver.maps.Map('map', {
+        var map = new naver.maps.Map('map');
+        /*var map = new naver.maps.Map('map', {
             center: new naver.maps.LatLng(37.5666805, 126.9784147),
             zoom: 15,
             minZoom: 7,
@@ -95,30 +99,238 @@
             },
             mapTypeId: naver.maps.MapTypeId.NORMAL
         });
-        var infowindow = new naver.maps.InfoWindow();
+        var infowindow = new naver.maps.InfoWindow();*/
+
+        $(window).on("load", function() {
+            var obj = {"brandCode": $("#brand").val()};
+            $.ajax({
+                url: "/productList",
+                type: "POST",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                contentType: "application/json",
+                success: function(data) {
+                    console.log(data);
+                    var productList = data.productList;
+
+                    for(let i=0; i < productList.length; i++){
+                        $('select#product').append('<option value="' + productList[i].productName + '">' + productList[i].productName + '</option>');
+                    }
+                    getStoreLsit();
+                },
+                error: function(errorThrown) {
+                    alert(errorThrown.statusText);
+                }
+            });
+            mapInit();
+        });
+
+        $(function() {
+            //브랜드 변경
+            $('#brand').change(function() {
+                $("select#product option").remove();
+
+                var obj = {"brandCode": $("#brand").val()};
+                $.ajax({
+                    url: "/productList",
+                    type: "POST",
+                    data: JSON.stringify(obj),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function(data) {
+                        console.log(data);
+                        var productList = data.productList;
+
+                        for(let i=0; i < productList.length; i++){
+                            $('select#product').append('<option value="' + productList[i].productName + '">' + productList[i].productName + '</option>');
+                        }
+                        getStoreLsit();
+                    },
+                    error: function(errorThrown) {
+                        alert(errorThrown.statusText);
+                    }
+                });
+            });
+
+
+            // 주변 약국찾기
+            $('.location button').each(function(idx) {
+                $(this).on('click', function(e) {
+                    e.preventDefault();
+                    // console.log(idx);
+                    //자기자신을 클릭하는 경우가 아니면 거리 정보를 초기화
+                    if(!$(this).hasClass("on")){
+                        $("#distance").val("");
+                        $('.distance').children().removeClass('on');
+                        $('.juso').children().removeClass('on');
+                    }
+
+                    $(this).addClass('on');
+                    $(this).siblings().removeClass('on');
+
+
+                    if($(this).val() == 'myplace') {
+                        $(this).parent().siblings().removeClass('on');
+                        $(this).parent().siblings().eq(idx).addClass('on');
+                        $('#location').val($(this).val());
+                    } else if($(this).val() == 'juso') {
+                        new daum.Postcode({
+                            oncomplete: function(data) {
+                                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                                // 카카오지도에서 가져온 정보를 기준으로 지도 이동 및 약국정보 가져옴.
+                                $('#address').val(data.address);
+                                naver.maps.Service.geocode({query: data.address},
+                                    function(status, response) {
+                                        if(status == naver.maps.Service.Status.ERROR) {
+                                            if(!address) {
+                                                return alert("Geocode Error, Please check address");
+                                            } else {
+                                                return alert("Geocode Error, address : " + address);
+                                            }
+                                        } else {
+                                            if(response.v2.meta.totalCount === 0) {
+                                                return alert("Geocode No result");
+                                            }
+                                            else {
+                                                var item = response.v2.addresses[0];
+                                                var lat = item.y;
+                                                var lng = item.x;
+
+                                                $("#latitude").val(lat);
+                                                $("#longitude").val(lng);
+                                                $('#location').val('juso');
+
+                                                var location = new naver.maps.LatLng(lat, lng);
+                                                map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                                                map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
+                                                // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
+                                                // infowindow.open(map, location);
+                                                // console.log('Coordinates: ' + location.toString());
+                                                var marker = new naver.maps.Marker({
+                                                    position: new naver.maps.LatLng(lat, lng),
+                                                    map: map
+                                                });
+                                                $('.distance').removeClass('on');
+                                                $('.juso').addClass('on');
+
+                                                getStoreLsit();
+                                            }
+                                        }
+                                    });
+                            }
+                        }).open();
+                    }
+                });
+            });
+            $('.distance button').each(function() {
+                $(this).on('click', function(e) {
+                    e.preventDefault();
+                    $(this).addClass('on');
+                    $(this).siblings().removeClass('on');
+                    $("#distance").val($(this).val());
+
+                    getStoreLsit();
+                });
+            });
+            $('.juso button').each(function() {
+
+                $(this).on('click', function(e) {
+                    e.preventDefault();
+                    $(this).addClass('on');
+                    $(this).siblings().removeClass('on');
+
+                    $("#distance").val($(this).val());
+                    getStoreLsit();
+                });
+            });
+        });
+
 
         function onSuccessGeolocation(position) {
-            var location = new naver.maps.LatLng(position.coords.latitude,
-                position.coords.longitude);
+            // 내 근처 찾기인 경우에는 현재 위치, 아닌 경우에는 찾은 주소의 위/경도 값을 기준으로 초기화
+            if($('#location').val() == "myplace"){
+                $("#latitude").val(position.coords.latitude);
+                $("#longitude").val(position.coords.longitude);
+                /*                var location = new naver.maps.LatLng(position.coords.latitude,
+                                    position.coords.longitude);*/
+            }
+            var location = new naver.maps.LatLng($("#latitude").val(), $("#longitude").val());
             map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
             map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
             // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
             // infowindow.open(map, location);
             // console.log('Coordinates: ' + location.toString());
             var marker = new naver.maps.Marker({
-                position: new naver.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                position: new naver.maps.LatLng($("#latitude").val(), $("#longitude").val()),
                 map: map
             });
         }
 
         function onErrorGeolocation() {
-            var center = map.getCenter();
+            /*var item = searchAddressToCoordinate("서울 강남구 언주로 702");
+            var lat = item.y;
+            var lng = item.x;
+            var location = new naver.maps.LatLng(lat, lng);
+            map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+            map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
+            // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
+            // infowindow.open(map, location);
+            // console.log('Coordinates: ' + location.toString());
+            var marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng(lat, lng),
+                map: map
+            });*/
+
+            //var center = map.getCenter();
             // infowindow.setContent('<div style="padding:20px;">' +
             //     '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
             // infowindow.open(map, center);
+
+            //위치정보 공유 안할 경우 경남제약 본사를 default로..
+            naver.maps.Service.geocode({query: "서울 강남구 언주로 702"},
+                function(status, response) {
+                    if(status == naver.maps.Service.Status.ERROR) {
+                        if(!address) {
+                            return alert("Geocode Error, Please check address");
+                        } else {
+                            return alert("Geocode Error, address : " + address);
+                        }
+                    } else {
+                        if(response.v2.meta.totalCount === 0) {
+                            return alert("Geocode No result");
+                        }
+                        else {
+                            var item = response.v2.addresses[0];
+                            var lat = item.y;
+                            var lng = item.x;
+
+                            $("#latitude").val(lat);
+                            $("#longitude").val(lng);
+
+                            var location = new naver.maps.LatLng(lat, lng);
+                            map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                            map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
+                            // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
+                            // infowindow.open(map, location);
+                            // console.log('Coordinates: ' + location.toString());
+                            var marker = new naver.maps.Marker({
+                                position: new naver.maps.LatLng(lat, lng),
+                                map: map
+                            });
+                        }
+                    }
+                });
         }
 
-        $(window).on("load", function() {
+
+
+        let markers = new Array(); // 마커 정보를 담는 배열
+        let infoWindows = new Array(); // 정보창을 담는 배열
+
+        function mapInit() {
+            //지도 초기화
+            map = new naver.maps.Map('map');
             // 네이버 현위치 지도 호출
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
@@ -127,7 +339,96 @@
                 // infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
                 // infowindow.open(map, center);
             }
-        });
+        }
+
+        function getStoreLsit() {
+            mapInit();
+            //모든 값이 있을 경우에만 약국정보를 가져옴.
+            if($("#latitude").val() != "" && $("#longitude").val() != "" && $("#distance").val() != "" && $('#brand').val() !== "" && $('#product').val() != ""){
+                var obj = {"latitude": $("#latitude").val(), "longitude": $("#longitude").val(), "distance" : $("#distance").val(), "brandCode" : $('#brand').val(), 'productName' : $('#product').val()};
+                $.ajax({
+                    url: "/storeList",
+                    type: "POST",
+                    data: JSON.stringify(obj),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function(data) {
+                        console.log(data);
+                        var storeList = data.storeList;
+
+                        for(let i=0; i < storeList.length; i++){
+                            var position = new naver.maps.LatLng(
+                                storeList[i].latitude,
+                                storeList[i].longitude);
+
+                            var marker = new naver.maps.Marker({
+                                map: map,
+                                position: position,
+                                title: storeList[i].storeName,
+                                zIndex: 100
+                            });
+
+                            var infoWindow = new naver.maps.InfoWindow({
+                                content: '<div style="padding:10px;">'+ storeList[i].storeName +'</div>'
+                            });
+
+                            markers.push(marker);
+                            infoWindows.push(infoWindow);
+                        }
+                        for (var i=0, ii=markers.length; i<ii; i++) {
+                            naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+                        }
+                    },
+                    error: function(errorThrown) {
+                        alert(errorThrown.statusText);
+                    }
+                });
+            }
+        }
+
+
+        /*for (var i=0, ii=markers.length; i<ii; i++) {
+            naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+        }*/
+
+
+        // 해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환합니다.
+        function getClickHandler(seq) {
+            return function(e) {
+                var marker = markers[seq],
+                    infoWindow = infoWindows[seq];
+
+                if (infoWindow.getMap()) {
+                    infoWindow.close();
+                } else {
+                    infoWindow.open(map, marker);
+                }
+            }
+        }
+
+
+        //주소 -> 위/경도 조회
+        var searchAddressToCoordinate = function (address) {
+            naver.maps.Service.geocode({query: address},
+                function(status, response) {
+                    if(status == naver.maps.Service.Status.ERROR) {
+                        if(!address) {
+                            return alert("Geocode Error, Please check address");
+                        } else {
+                            return alert("Geocode Error, address : " + address);
+                        }
+                    } else {
+                        if(response.v2.meta.totalCount === 0) {
+                            return alert("Geocode No result");
+                        }
+                        else {
+                            var item = response.v2.addresses[0];
+                            return item;
+                        }
+                    }
+                })
+        }
+
     </script>
 </div>
 <div class="popup500 popup-terms">

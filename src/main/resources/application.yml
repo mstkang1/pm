@@ -7,6 +7,7 @@ server:
 mybatis:
   type-aliases-package: com.knpharm.pm.domain
   mapper-locations: mybatis/mapper/**/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
 
 # Thymleaf
 spring:
@@ -22,9 +23,9 @@ spring:
       on-profile: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/knpharm?serverTimezone=Asia/Seoul
-    username: root
-    password: master
+    url: jdbc:mysql://1.234.23.57:3306/knpharm?serverTimezone=Asia/Seoul
+    username: knadmin
+    password: kn@w2w
   devtools:
     livereload:
       enabled: true
@@ -40,8 +41,8 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/knpharm?serverTimezone=Asia/Seoul
-    username: root
-    password: master
+    url: jdbc:mysql://1.234.23.57:3306/knpharm?serverTimezone=Asia/Seoul
+    username: knadmin
+    password: kn@w2w
   thymeleaf:
     cache: true
