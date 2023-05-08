@@ -35,6 +35,28 @@ spring:
 server:
   port: 80
 
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/knpharm?serverTimezone=Asia/Seoul
+    username: knadmin
+    password: kn@w2w
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  thymeleaf:
+    cache: false # 개발시에는 수정시 즉시 반영 가능하게.
+server:
+  port: 8072
+
+
 ---
 spring:
   config:
@@ -42,7 +64,7 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://1.234.23.57:3306/knpharm?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/knpharm?serverTimezone=Asia/Seoul
     username: knadmin
     password: kn@w2w
   thymeleaf:
