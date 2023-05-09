@@ -1,7 +1,8 @@
 package com.knpharm.pm.web;
 
-import com.knpharm.pm.dao.ProductDAO;
-import com.knpharm.pm.domain.ProductVO;
+import com.knpharm.pm.mapper.ProductMapper;
+import com.knpharm.pm.dto.ProductDto;
+import com.knpharm.pm.service.product.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,16 @@ public class ProductController {
     private Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
-    private ProductDAO productDAO;
+    private ProductService productService;
 
     @ResponseBody
     @RequestMapping(value = "/productList", method = RequestMethod.POST)
-    public Map<String, Object> productList(@RequestBody ProductVO productVO){
+    public Map<String, Object> productList(@RequestBody ProductDto productDto) throws Exception {
 
         Map<String, Object> rtnObj = new HashMap<>();
 
-        List<ProductVO> productList = productDAO.listProduct(productVO);
-        logger.info("productList -> " + productList.toString());
+        List<ProductDto> productList = productService.selectProductList(productDto);
+        //logger.info("productList -> " + productList.toString());
 
         rtnObj.put("productList", productList);
         return rtnObj;

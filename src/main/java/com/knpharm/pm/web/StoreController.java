@@ -1,7 +1,8 @@
 package com.knpharm.pm.web;
 
-import com.knpharm.pm.dao.StoreDAO;
-import com.knpharm.pm.domain.StoreVO;
+import com.knpharm.pm.mapper.StoreMapper;
+import com.knpharm.pm.dto.StoreDto;
+import com.knpharm.pm.service.store.StoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class StoreController {
     private Logger logger = LoggerFactory.getLogger(StoreController.class);
 
     @Autowired
-    private StoreDAO storeDAO;
+    private StoreService storeService;
     @RequestMapping("/store")
     public  String store(Model model) {
         return "store";
@@ -30,12 +31,12 @@ public class StoreController {
 
     @ResponseBody
     @RequestMapping(value = "/storeList", method = RequestMethod.POST)
-    public Map<String, Object> storeList(@RequestBody StoreVO storeVO){
+    public Map<String, Object> storeList(@RequestBody StoreDto storeDto) throws Exception {
 
         Map<String, Object> rtnObj = new HashMap<>();
 
-        List<StoreVO> storeList = storeDAO.listStore(storeVO);
-        logger.info("storeList -> " + storeList.toString());
+        List<StoreDto> storeList = storeService.selectStoreList(storeDto);
+        //logger.info("storeList -> " + storeList.toString());
 
         rtnObj.put("storeList", storeList);
         return rtnObj;

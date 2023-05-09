@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.knpharm.pm.dao.StoreDAO">
+<mapper namespace="com.knpharm.pm.mapper.StoreMapper">
 
     <!-- 약국 리스트 조회 -->
-    <select id="listStore" parameterType="com.knpharm.pm.domain.StoreVO" resultType="com.knpharm.pm.domain.StoreVO">
+    <select id="selectStoreList" parameterType="com.knpharm.pm.dto.StoreDto" resultType="com.knpharm.pm.dto.StoreDto">
         <![CDATA[
         SELECT
             *
