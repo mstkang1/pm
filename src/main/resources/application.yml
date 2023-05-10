@@ -4,7 +4,7 @@ server:
     uri-encoding: UTF-8
 
 mybatis:
-  type-aliases-package: com.knpharm.pm.domain
+  type-aliases-package: com.knpharm.pm.dto
   mapper-locations: mybatis/mapper/**/*.xml
   config-location: classpath:mybatis/mybatis-config.xml
 

@@ -6,7 +6,7 @@
 <mapper namespace="com.knpharm.pm.mapper.ProductMapper">
 
     <!-- 약국 리스트 조회 -->
-    <select id="selectProductList" parameterType="com.knpharm.pm.dto.ProductDto" resultType="com.knpharm.pm.dto.ProductDto">
+    <select id="selectProductList" parameterType="ProductDto" resultType="ProductDto">
         <![CDATA[
         SELECT
             *
