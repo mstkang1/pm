@@ -18,6 +18,9 @@
     <th:block th:if="${@environment.getProperty('spring.config.activate.on-profile') == 'local'}">
         <script th:inline="javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l2o6xz5abj&submodules=geocoder"></script>
     </th:block>
+    <th:block th:if="${@environment.getProperty('spring.config.activate.on-profile') == 'dev'}">
+        <script th:inline="javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l2o6xz5abj&submodules=geocoder"></script>
+    </th:block>
     <th:block th:if="${@environment.getProperty('spring.config.activate.on-profile') == 'prod'}">
         <script th:inline="javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bsj7qymjt7&submodules=geocoder"></script>
     </th:block>
