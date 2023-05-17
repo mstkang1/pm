@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
     List<ProductDto> selectProductList(ProductDto productDto) throws Exception;
+
+    ProductDto selectProduct(String productName) throws Exception;
 }

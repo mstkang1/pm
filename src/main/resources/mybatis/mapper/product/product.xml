@@ -15,5 +15,14 @@
         ORDER BY PRODUCT_ORDER ASC
         ]]>
     </select>
+    <select id="selectProduct" parameterType="String" resultType="ProductDto">
+        <![CDATA[
+        SELECT
+            A.*, B.BRAND_NAME
+        FROM TBL_PRODUCT A LEFT OUTER JOIN TBL_BRAND B ON A.BRAND_CODE = B.BRAND_CODE
+        WHERE PRODUCT_NAME = #{productName}
+        ]]>
+    </select>
+
 
 </mapper>

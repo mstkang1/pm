@@ -50,10 +50,16 @@
         <!-- 메인배너 swiper -->
         <div class="main-banner-wrap">
             <div class="swiper main-banner pc">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="/img/banner1.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/img/banner2.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/img/banner3.jpg" alt=""></div>
+                <div class="swiper-wrapper"  th:each="banner : ${bannerList}">
+                    <div class="swiper-slide">
+                        <!--<th:block th:if="${not #strings.isEmpty(banner.bannerPCUrl)}">
+                            <a th:href="@{/{pcUrl}(pcUrl=${banner.bannerPcUrl})}" th:target="${banner.bannerPcIsNew} ? '_blank' : ''"></a>
+                        </th:block>
+                        <img src="/banner/download/[[${banner.bannerSeq}]]" alt="">
+                        <th:block th:if="${not #strings.isEmpty(banner.bannerPCUrl)}">
+                            </a>
+                        </th:block>-->
+                    </div>
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="product-button-prev"></div>
