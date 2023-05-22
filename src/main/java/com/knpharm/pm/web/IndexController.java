@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -25,9 +27,16 @@ public class IndexController {
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
     @RequestMapping(value = {"/", "/index"})
     public  String index(Model model) throws Exception {
+
+        Map<String, Object> rtnObj = new HashMap<>();
+
         List<BannerDto> bannerList = bannerService.selectBannerList("P");
 
         List<PopupDto> popupList = popupService.selectPopupList("P");
+
+        rtnObj.put("bannerList", bannerList);
+
+        rtnObj.put("popupList", popupList);
 
         return "index";
     }
