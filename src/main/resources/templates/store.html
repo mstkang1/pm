@@ -112,7 +112,7 @@
         $(window).on("load", function() {
             var obj = {"brandCode": $("#brand").val()};
             $.ajax({
-                url: "/productList",
+                url: "/product/productList",
                 type: "POST",
                 data: JSON.stringify(obj),
                 dataType: "json",
@@ -140,7 +140,7 @@
 
                 var obj = {"brandCode": $("#brand").val()};
                 $.ajax({
-                    url: "/productList",
+                    url: "/product/productList",
                     type: "POST",
                     data: JSON.stringify(obj),
                     dataType: "json",
@@ -185,6 +185,7 @@
                         $(this).parent().siblings().removeClass('on');
                         $(this).parent().siblings().eq(idx).addClass('on');
                         $('#location').val($(this).val());
+                        mapInit();
                     } else if($(this).val() == 'juso') {
                         new daum.Postcode({
                             oncomplete: function(data) {
@@ -213,16 +214,25 @@
                                                 $("#longitude").val(lng);
                                                 $('#location').val('juso');
 
-                                                var location = new naver.maps.LatLng(lat, lng);
-                                                map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                                                var position = new naver.maps.LatLng(lat, lng);
+                                                map.setCenter(position); // 얻은 좌표를 지도의 중심으로 설정합니다.
                                                 map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
                                                 // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
                                                 // infowindow.open(map, location);
                                                 // console.log('Coordinates: ' + location.toString());
-                                                var marker = new naver.maps.Marker({
-                                                    position: new naver.maps.LatLng(lat, lng),
-                                                    map: map
-                                                });
+
+                                                var markerOptions = {
+                                                    position: position.destinationPoint(90, 15),
+                                                    map: map,
+                                                    icon: {
+                                                        url: '/img/marker/marker_me_mo.png',
+                                                        size: new naver.maps.Size(38, 57),
+                                                        origin: new naver.maps.Point(0, 0)
+                                                        /*,anchor: new naver.maps.Point(25, 26)*/
+                                                    }
+                                                };
+                                                var marker = new naver.maps.Marker(markerOptions);
+
                                                 $('.distance').removeClass('on');
                                                 $('.juso').addClass('on');
 
@@ -267,16 +277,24 @@
                 /*                var location = new naver.maps.LatLng(position.coords.latitude,
                                     position.coords.longitude);*/
             }
-            var location = new naver.maps.LatLng($("#latitude").val(), $("#longitude").val());
-            map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+            var position = new naver.maps.LatLng($("#latitude").val(), $("#longitude").val());
+            map.setCenter(position); // 얻은 좌표를 지도의 중심으로 설정합니다.
             map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
             // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
             // infowindow.open(map, location);
             // console.log('Coordinates: ' + location.toString());
-            var marker = new naver.maps.Marker({
-                position: new naver.maps.LatLng($("#latitude").val(), $("#longitude").val()),
-                map: map
-            });
+
+            var markerOptions = {
+                position: position.destinationPoint(90, 15),
+                map: map,
+                icon: {
+                    url: '/img/marker/marker_me_mo.png',
+                    size: new naver.maps.Size(38, 57),
+                    origin: new naver.maps.Point(0, 0)
+                    /*,anchor: new naver.maps.Point(25, 26)*/
+                }
+            };
+            var marker = new naver.maps.Marker(markerOptions);
         }
 
         function onErrorGeolocation() {
@@ -320,16 +338,24 @@
                             $("#latitude").val(lat);
                             $("#longitude").val(lng);
 
-                            var location = new naver.maps.LatLng(lat, lng);
-                            map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                            var position = new naver.maps.LatLng(lat, lng);
+                            map.setCenter(position); // 얻은 좌표를 지도의 중심으로 설정합니다.
                             map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
                             // infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
                             // infowindow.open(map, location);
                             // console.log('Coordinates: ' + location.toString());
-                            var marker = new naver.maps.Marker({
-                                position: new naver.maps.LatLng(lat, lng),
-                                map: map
-                            });
+
+                            var markerOptions = {
+                                position: position.destinationPoint(90, 15),
+                                map: map,
+                                icon: {
+                                    url: '/img/marker/marker_me_mo.png',
+                                    size: new naver.maps.Size(38, 57),
+                                    origin: new naver.maps.Point(0, 0)
+                                    /*,anchor: new naver.maps.Point(25, 26)*/
+                                }
+                            };
+                            var marker = new naver.maps.Marker(markerOptions);
                         }
                     }
                 });
@@ -354,12 +380,12 @@
         }
 
         function getStoreLsit() {
-            mapInit();
+            //mapInit();
             //모든 값이 있을 경우에만 약국정보를 가져옴.
             if($("#latitude").val() != "" && $("#longitude").val() != "" && $("#distance").val() != "" && $('#brand').val() !== "" && $('#product').val() != ""){
                 var obj = {"latitude": $("#latitude").val(), "longitude": $("#longitude").val(), "distance" : $("#distance").val(), "brandCode" : $('#brand').val(), 'productName' : $('#product').val()};
                 $.ajax({
-                    url: "/storeList",
+                    url: "/store/storeList",
                     type: "POST",
                     data: JSON.stringify(obj),
                     dataType: "json",
@@ -372,24 +398,57 @@
                             var position = new naver.maps.LatLng(
                                 storeList[i].latitude,
                                 storeList[i].longitude);
-
-                            var marker = new naver.maps.Marker({
+                            var markerOptions = {
+                                position: position.destinationPoint(90, 15),
                                 map: map,
-                                position: position,
-                                title: storeList[i].storeName,
-                                zIndex: 100
+                                icon: {
+                                    url: '/img/marker/marker_store_mo.png',
+                                    size: new naver.maps.Size(38, 57),
+                                    origin: new naver.maps.Point(0, 0)
+                                    /*,anchor: new naver.maps.Point(25, 26)*/
+                                }
+                            };
+
+                            var marker = new naver.maps.Marker(markerOptions);
+
+                            var contentString = [
+                                '<div class="iw_inner" id="divInfo' + i + '">',
+                                '<button type="button" id="btn_clear' + i + '"></button>',
+                                '<h3>' + storeList[i].storeName + '</h3>',
+                                '<ul>',
+                                '<li><img src="/img/i_map.png"/>' + storeList[i].address  + ' ' + storeList[i].phone  + '</li>',
+                                '</ul>',
+                                '</div>'
+                            ].join('');
+
+                            var infowindow = new naver.maps.InfoWindow({
+                                content: contentString
                             });
 
-                            var infoWindow = new naver.maps.InfoWindow({
-                                content: '<div style="padding:10px;">'+ storeList[i].storeName +'</div>'
-                            });
+                            /*$(infowindow.getWrapElement()).find('#btn_clear' + i).on('click', function(e) {
+                                infowindow.close();
+                            });*/
+
+
+
+                            /*var infoWindow = new naver.maps.InfoWindow({
+                                content:    '<div class="iw_inner">' +
+                                            '<button type="button" onclick="infoWindow.close();"></button>' +
+                                            '<h3>' + storeList[i].storeName + '</h3>' +
+                                            '<ul>' +
+                                            '<li><img src="/img/i_map.png"/>' + storeList[i].address  + ' ' + storeList[i].phone  + '</li>' +
+                                            '</ul>' +
+                                            '</div>'
+                            });*/
 
                             markers.push(marker);
-                            infoWindows.push(infoWindow);
+                            infoWindows.push(infowindow);
+
                         }
                         for (var i=0, ii=markers.length; i<ii; i++) {
                             naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
                         }
+
                     },
                     error: function(errorThrown) {
                         alert(errorThrown.statusText);
@@ -417,7 +476,6 @@
                 }
             }
         }
-
 
         //주소 -> 위/경도 조회
         var searchAddressToCoordinate = function (address) {

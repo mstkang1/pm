@@ -33,10 +33,11 @@ public class IndexController {
         List<BannerDto> bannerList = bannerService.selectBannerList("P");
 
         List<PopupDto> popupList = popupService.selectPopupList("P");
+        PopupDto popup = popupList.get(0);
 
-        rtnObj.put("bannerList", bannerList);
 
-        rtnObj.put("popupList", popupList);
+        model.addAttribute("bannerList", bannerList);
+        model.addAttribute("popup", popup);
 
         return "index";
     }

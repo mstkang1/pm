@@ -12,8 +12,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductMapper productMapper;
+
     @Override
-    public List<ProductDto> selectProductList(ProductDto productDto) throws Exception {
-        return productMapper.selectProductList(productDto);
+    public List<ProductDto> selectProductList(String brandCode) throws Exception {
+        return productMapper.selectProductList(brandCode);
+    }
+    @Override
+    public ProductDto selectProduct(String productName) throws Exception {
+        return productMapper.selectProduct(productName);
     }
 }

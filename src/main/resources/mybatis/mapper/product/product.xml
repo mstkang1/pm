@@ -5,8 +5,8 @@
 
 <mapper namespace="com.knpharm.pm.mapper.ProductMapper">
 
-    <!-- 약국 리스트 조회 -->
-    <select id="selectProductList" parameterType="ProductDto" resultType="ProductDto">
+    <!-- 제품 리스트 조회 -->
+    <select id="selectProductList" parameterType="String" resultType="ProductDto">
         <![CDATA[
         SELECT
             *

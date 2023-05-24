@@ -15,4 +15,13 @@
         ]]>
     </select>
 
+    <select id="selectPopup" parameterType="int" resultType="PopupDto">
+        <![CDATA[
+        SELECT
+            A.*, B.BRAND_NAME
+        FROM TBL_POPUP A LEFT OUTER JOIN TBL_BRAND B ON A.BRAND_CODE = B.BRAND_CODE
+        WHERE POPUP_SEQ = #{popupSeq}
+        ]]>
+    </select>
+
 </mapper>

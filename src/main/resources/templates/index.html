@@ -22,8 +22,8 @@
 <!-- // 모바일 메뉴, 팝업 활성화 시 배경 어둡게 처리 -->
 <header id="headerMenu">
     <div class="header-wrap">
-        <h1 class="pc"><a href="index.html#main"><img src="/img/logo.png" alt="PM 로고"></a></h1>
-        <h1 class="mo"><a href="index.html#main"><img src="/img/mo-logo.png" alt="PM 로고"></a></h1>
+        <h1 class="pc"><a href="/index#main"><img src="/img/logo.png" alt="PM 로고"></a></h1>
+        <h1 class="mo"><a href="/index#main"><img src="/img/mo-logo.png" alt="PM 로고"></a></h1>
         <nav>
             <div class="btn-menu-close mo">
                 <img src="/img/btn-menu-close.png" alt="메뉴 닫기버튼">
@@ -45,6 +45,19 @@
     </div>
 </header>
 <main>
+    <!--팝업영역-->
+    <th:block th:if="${popup.popupIsShow}">
+        <div>
+            <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
+                <a th:href="@{{pcUrl}(pcUrl=${popup.popupPcUrl})}" th:target="${popup.popupPcIsNew} ? '_blank' : ''">
+            </th:block>
+            <img th:src="@{/popup/download/P/{popupSeq}(popupSeq=${popup.popupSeq})}" alt="">
+            <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
+                </a>
+            </th:block>
+        </div>
+    </th:block>
+
     <!-- 상단배너 영역 -->
     <div class="section" id="main">
         <!-- 메인배너 swiper -->
@@ -52,12 +65,12 @@
             <div class="swiper main-banner pc">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"  th:each="banner : ${bannerList}">
-                        <th:block th:if="${not #strings.isEmpty(banner.bannerPCUrl)}">
-                            <a th:href="@{/{pcUrl}(pcUrl=${banner.bannerPcUrl})}" th:target="${banner.bannerPcIsNew} ? '_blank' : ''"></a>
+                        <th:block th:if="${not #strings.isEmpty(banner.bannerPcUrl)}">
+                            <a th:href="@{{pcUrl}(pcUrl=${banner.bannerPcUrl})}" th:target="${banner.bannerPcIsNew} ? '_blank' : ''">
                         </th:block>
-                        <!--<img src="/banner/download/" alt="">-->
-                        <img src="/img/banner1.jpg" alt="">
-                        <th:block th:if="${not #strings.isEmpty(banner.bannerPCUrl)}">
+                        <img th:src="@{/banner/download/P/{bannerSeq}(bannerSeq=${banner.bannerSeq})}" alt="">
+                        <!--<img src="/img/banner1.jpg" alt="">-->
+                        <th:block th:if="${not #strings.isEmpty(banner.bannerPcUrl)}">
                             </a>
                         </th:block>
                     </div>
@@ -69,9 +82,16 @@
 
             <div class="swiper main-banner mo">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="/img/mo-banner1.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/img/mo-banner2.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/img/mo-banner3.jpg" alt=""></div>
+                    <div class="swiper-slide"  th:each="banner : ${bannerList}">
+                        <th:block th:if="${not #strings.isEmpty(banner.bannerMoUrl)}">
+                            <a th:href="@{{pcUrl}(pcUrl=${banner.bannerMoUrl})}" th:target="${banner.bannerMoIsNew} ? '_blank' : ''">
+                        </th:block>
+                        <img th:src="@{/banner/download/M/{bannerSeq}(bannerSeq=${banner.bannerSeq})}" alt="">
+                        <!--<img src="/img/banner1.jpg" alt="">-->
+                        <th:block th:if="${not #strings.isEmpty(banner.bannerMoUrl)}">
+                            </a>
+                        </th:block>
+                    </div>
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="product-button-prev"></div>
@@ -424,9 +444,9 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetailCache?cacheSeq=201701906aupdateTs2022-12-28%2013:43:36.745792b" class="file-down mo" target="_blank">주의사항</a>
+                <a href="javascript:fileDown('피엠외용액');" class="file-down mo">주의사항</a>
             </div>
-            <a href="https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetailCache?cacheSeq=201701906aupdateTs2022-12-28%2013:43:36.745792b" class="file-down pc" target="_blank">주의사항</a>
+            <a href="javascript:fileDown('피엠외용액');" class="file-down pc">주의사항</a>
         </div>
     </div>
     <div class="section product2-wrap" id="product2">
@@ -540,9 +560,9 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="/file/6.pdf" class="file-down mo" target="_blank">주의사항</a>
+                <a href="javascript:fileDown('피엠트리플크림');" class="file-down mo">주의사항</a>
             </div>
-            <a href="/file/6.pdf" class="file-down pc" target="_blank">주의사항</a>
+            <a href="javascript:fileDown('피엠트리플크림');" class="file-down pc">주의사항</a>
         </div>
     </div>
     <div class="section product3-wrap" id="product3">
@@ -639,9 +659,9 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="/file/5.pdf" target="_blank" class="file-down mo">주의사항</a>
+                <a href="javascript:fileDown('피엠네일라카');" class="file-down mo">주의사항</a>
             </div>
-            <a href="/file/5.pdf" target="_blank" class="file-down pc">주의사항</a>
+            <a href="javascript:fileDown('피엠네일라카');" class="file-down pc">주의사항</a>
         </div>
     </div>
     <div class="section product4-wrap" id="product4">
@@ -745,9 +765,9 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="/file/7.pdf"  target="_blank" class="file-down mo">주의사항</a>
+                <a href="javascript:fileDown('피엠졸큐액');"  class="file-down mo">주의사항</a>
             </div>
-            <a href="/file/7.pdf"  target="_blank" class="file-down pc">주의사항</a>
+            <a href="javascript:fileDown('피엠졸큐액');" class="file-down pc">주의사항</a>
         </div>
     </div>
     <div class="section product5-wrap" id="product5">
@@ -857,9 +877,9 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="/file/8.pdf" target="_blank" class="file-down mo">주의사항</a>
+                <a href="javascript:fileDown('피엠쿨에어로솔');" class="file-down mo">주의사항</a>
             </div>
-            <a href="/file/8.pdf" target="_blank" class="file-down pc">주의사항</a>
+            <a href="javascript:fileDown('피엠쿨에어로솔');"  class="file-down pc">주의사항</a>
         </div>
     </div>
     <div class="section qna-wrap" id="menu3"> <!-- 2023.04.28 #qna -> #menu3 로 변경 -->
@@ -1065,5 +1085,10 @@
 </footer>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script>
+    function fileDown(productName) {
+        window.location.href="/product/download/" + productName;
+    }
+</script>
 </body>
 </html>

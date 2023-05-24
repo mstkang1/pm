@@ -15,6 +15,8 @@ public class StoreDto {
 
     private String address;
 
+    private String phone;
+
     private float latitude;
 
     private float longitude;

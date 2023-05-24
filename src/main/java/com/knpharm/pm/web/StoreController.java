@@ -18,13 +18,14 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/store")
 public class StoreController {
 
     private Logger logger = LoggerFactory.getLogger(StoreController.class);
 
     @Autowired
     private StoreService storeService;
-    @RequestMapping("/store")
+    @RequestMapping("")
     public  String store(Model model) {
         return "store";
     }
