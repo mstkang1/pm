@@ -226,7 +226,7 @@
                                                     map: map,
                                                     icon: {
                                                         url: '/img/marker/marker_me_mo.png',
-                                                        size: new naver.maps.Size(38, 57),
+                                                        size: new naver.maps.Size(19, 29),
                                                         origin: new naver.maps.Point(0, 0)
                                                         /*,anchor: new naver.maps.Point(25, 26)*/
                                                     }
@@ -289,7 +289,7 @@
                 map: map,
                 icon: {
                     url: '/img/marker/marker_me_mo.png',
-                    size: new naver.maps.Size(38, 57),
+                    size: new naver.maps.Size(19, 29),
                     origin: new naver.maps.Point(0, 0)
                     /*,anchor: new naver.maps.Point(25, 26)*/
                 }
@@ -350,7 +350,7 @@
                                 map: map,
                                 icon: {
                                     url: '/img/marker/marker_me_mo.png',
-                                    size: new naver.maps.Size(38, 57),
+                                    size: new naver.maps.Size(19, 29),
                                     origin: new naver.maps.Point(0, 0)
                                     /*,anchor: new naver.maps.Point(25, 26)*/
                                 }
@@ -403,7 +403,7 @@
                                 map: map,
                                 icon: {
                                     url: '/img/marker/marker_store_mo.png',
-                                    size: new naver.maps.Size(38, 57),
+                                    size: new naver.maps.Size(19, 29),
                                     origin: new naver.maps.Point(0, 0)
                                     /*,anchor: new naver.maps.Point(25, 26)*/
                                 }
@@ -412,11 +412,12 @@
                             var marker = new naver.maps.Marker(markerOptions);
 
                             var contentString = [
-                                '<div class="iw_inner" id="divInfo' + i + '">',
-                                '<button type="button" id="btn_clear' + i + '"></button>',
+                                '<div class="iw_inner">',
+                                /*'<button type="button" id="btn_clear' + i + '"></button>',*/
                                 '<h3>' + storeList[i].storeName + '</h3>',
                                 '<ul>',
-                                '<li><img src="/img/i_map.png"/>' + storeList[i].address  + ' ' + storeList[i].phone  + '</li>',
+                                '<li><img src="/img/i_map.png"/>' + storeList[i].address  + '</li>',
+                                '<li><img src="/img/i_call.png"/>' + storeList[i].phone + '</li>',
                                 '</ul>',
                                 '</div>'
                             ].join('');

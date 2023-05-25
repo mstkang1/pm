@@ -3876,24 +3876,25 @@ footer {
 
 .iw_inner {
     background: #fff;
-    padding: 40px;
+    padding: 20px;
     position: relative;
     text-align: left;
 }
 
 .iw_inner button {
     background: url(../img/i_x.png) no-repeat;
+    background-size: cover;
     border: 0;
-    height: 28px;
+    height: 20px;
     position: absolute;
     right: 20px;
     top: 20px;
-    width: 28px;
+    width: 20px;
 }
 
 .iw_inner h3 {
     color: #494949;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 700;
     margin: 0 0 32px 0;
 }
@@ -3901,7 +3902,52 @@ footer {
 .iw_inner ul li {
     align-items: center;
     color: #494949;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 300;
     display: flex;
+}
+
+.iw_inner ul li img {
+    height: 20px;
+    width: 20px;
+}
+
+@media screen and (max-width:576px) {
+    .iw_inner {
+        background: #fff;
+        padding: 12px;
+        position: relative;
+        text-align: left;
+    }
+    
+    .iw_inner button {
+        background: url(../img/i_x.png) no-repeat;
+        background-size: cover;
+        border: 0;
+        height: 16px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 16px;
+    }
+    
+    .iw_inner h3 {
+        color: #494949;
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 32px 0;
+    }
+    
+    .iw_inner ul li {
+        align-items: center;
+        color: #494949;
+        font-size: 14px;
+        font-weight: 300;
+        display: flex;
+    }
+
+    .iw_inner ul li img {
+        height: 16px;
+        width: 16px;
+    }
 }
