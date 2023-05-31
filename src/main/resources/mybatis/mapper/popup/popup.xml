@@ -11,7 +11,7 @@
         SELECT
             *
         FROM TBL_POPUP
-        WHERE BRAND_CODE = #{brandCode}
+        WHERE BRAND_CODE = #{brandCode} AND NOW() BETWEEN POPUP_START_DATE AND POPUP_END_DATE
         ]]>
     </select>
 
@@ -20,7 +20,7 @@
         SELECT
             A.*, B.BRAND_NAME
         FROM TBL_POPUP A LEFT OUTER JOIN TBL_BRAND B ON A.BRAND_CODE = B.BRAND_CODE
-        WHERE POPUP_SEQ = #{popupSeq}
+        WHERE POPUP_SEQ = #{popupSeq} AND NOW() BETWEEN POPUP_START_DATE AND POPUP_END_DATE
         ]]>
     </select>
 
