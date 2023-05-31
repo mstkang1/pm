@@ -15,8 +15,8 @@ public class PopupServiceImpl implements PopupService {
     private PopupMapper popupMapper;
 
     @Override
-    public List<PopupDto> selectPopupList(String brandCode) throws Exception {
-        return popupMapper.selectPopupList(brandCode);
+    public PopupDto selectPopupBrand(String brandCode) throws Exception {
+        return popupMapper.selectPopupBrand(brandCode);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface PopupMapper {
-    List<PopupDto> selectPopupList(String brandCode) throws Exception;
+    PopupDto selectPopupBrand(String brandCode) throws Exception;
 
     PopupDto selectPopup(int popupSeq) throws Exception;
 

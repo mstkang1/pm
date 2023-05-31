@@ -32,8 +32,7 @@ public class IndexController {
 
         List<BannerDto> bannerList = bannerService.selectBannerList("P");
 
-        List<PopupDto> popupList = popupService.selectPopupList("P");
-        PopupDto popup = popupList.get(0);
+        PopupDto popup = popupService.selectPopupBrand("P");
 
 
         model.addAttribute("bannerList", bannerList);

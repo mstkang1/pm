@@ -6,12 +6,12 @@
 <mapper namespace="com.knpharm.pm.mapper.PopupMapper">
 
     <!-- 리스트 조회 -->
-    <select id="selectPopupList" parameterType="String" resultType="PopupDto">
+    <select id="selectPopupBrand" parameterType="String" resultType="PopupDto">
         <![CDATA[
         SELECT
             *
         FROM TBL_POPUP
-        WHERE BRAND_CODE = #{brandCode} AND NOW() BETWEEN POPUP_START_DATE AND POPUP_END_DATE
+        WHERE BRAND_CODE = #{brandCode} AND POPUP_IS_SHOW = TRUE AND NOW() BETWEEN POPUP_START_DATE AND POPUP_END_DATE
         ]]>
     </select>
 
@@ -20,7 +20,7 @@
         SELECT
             A.*, B.BRAND_NAME
         FROM TBL_POPUP A LEFT OUTER JOIN TBL_BRAND B ON A.BRAND_CODE = B.BRAND_CODE
-        WHERE POPUP_SEQ = #{popupSeq} AND NOW() BETWEEN POPUP_START_DATE AND POPUP_END_DATE
+        WHERE POPUP_SEQ = #{popupSeq}
         ]]>
     </select>
 

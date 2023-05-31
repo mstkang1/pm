@@ -46,7 +46,7 @@
 </header>
 <main>
     <!--팝업영역-->
-    <th:block th:if="${popup.popupIsShow}">
+    <th:block th:if="${popup}">
         <div>
             <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
                 <a th:href="@{{pcUrl}(pcUrl=${popup.popupPcUrl})}" th:target="${popup.popupPcIsNew} ? '_blank' : ''">
