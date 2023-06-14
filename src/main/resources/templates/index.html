@@ -1099,12 +1099,48 @@
             <p class="copyright pc">&copy;2018 KYUNG NAM PHARM CO., LTD. ALL RIGHTS RESERVED.</p>
         </div>
 </footer>
+<!-- 레이어팝업 추가 -->
+<!-- <button type="button" onclick="openPopup('layer-popup')"></button> -->
+<th:block th:if="${popup}">
+    <div class="popup layer-popup">
+        <div class="popup-wrap">
+            <!-- <div class="modal-header">
+                <h1 class="modal-title">타이틀 위치</h1>
+            </div> -->
+            <div class="modal-body">
+                <!--MO-->
+                <th:block th:if="${not #strings.isEmpty(popup.popupMoUrl)}">
+                    <a th:href="@{{pcUrl}(pcUrl=${popup.popupMoUrl})}" th:target="${popup.popupMoIsNew} ? '_blank' : ''">
+                </th:block>
+                <img class="mo" th:src="@{/popup/download/M/{popupSeq}(popupSeq=${popup.popupSeq})}" alt="">
+                <th:block th:if="${not #strings.isEmpty(popup.popupMoUrl)}">
+                    </a>
+                </th:block>
+                <!--PC-->
+                <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
+                    <a th:href="@{{pcUrl}(pcUrl=${popup.popupPcUrl})}" th:target="${popup.popupPcIsNew} ? '_blank' : ''">
+                </th:block>
+                <img class="pc" th:src="@{/popup/download/P/{popupSeq}(popupSeq=${popup.popupSeq})}" alt="">
+                <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
+                    </a>
+                </th:block>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="closePopupDim('layer-popup');">닫기</button>
+            </div>
+        </div>
+    </div>
+</th:block>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script>
     function fileDown(productName) {
         window.location.href="/product/download/" + productName;
     }
+    <!--팝업영역-->
+    /*[# th:if="${popup}"]*/
+    openPopup('layer-popup');
+    /*[/]*/
 </script>
 </body>
 </html>

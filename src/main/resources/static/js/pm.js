@@ -273,6 +273,20 @@ function closePopupDim(modalname) {
     $('.dim').removeClass('on');
 }
 
+function loadingOpen(modalname) {
+    document.get
+    $("." + modalname).fadeIn(300);
+    $('body').css("pointer-events","none");
+    $('.lodaing').addClass('on');
+}
+
+function lodaingClose(modalname) {
+    document.get
+    $("." + modalname).fadeOut(300);
+    $('body').css("pointer-events","auto");
+    $('.lodaing').removeClass('on');
+}
+
 function popupWindow() {
     window.open("terms.html","popup", "width=320, height=500, left=0, top=0, scrollbars=no,titlebar=no,status=no,resizable=no,fullscreen=no");
 }
