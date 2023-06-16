@@ -73,7 +73,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/knpharm?serverTimezone=Asia/Seoul
-    username: pm
+    username: knadmin
     password: kn@w2w
   thymeleaf:
     cache: true
