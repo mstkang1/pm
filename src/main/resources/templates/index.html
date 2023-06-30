@@ -89,19 +89,6 @@
     </div>
 </header>
 <main>
-    <!--팝업영역-->
-    <th:block th:if="${popup}">
-        <div>
-            <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
-                <a th:href="@{{pcUrl}(pcUrl=${popup.popupPcUrl})}" th:target="${popup.popupPcIsNew} ? '_blank' : ''">
-            </th:block>
-            <img th:src="@{/popup/download/P/{popupSeq}(popupSeq=${popup.popupSeq})}" alt="">
-            <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
-                </a>
-            </th:block>
-        </div>
-    </th:block>
-
     <!-- 상단배너 영역 -->
     <div class="section" id="main">
         <!-- 메인배너 swiper -->
