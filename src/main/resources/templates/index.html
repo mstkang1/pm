@@ -97,7 +97,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"  th:each="banner : ${bannerList}">
                         <th:block th:if="${not #strings.isEmpty(banner.bannerPcUrl)}">
-                            <a th:href="@{{pcUrl}(pcUrl=${banner.bannerPcUrl})}" th:target="${banner.bannerPcIsNew} ? '_blank' : ''">
+                            <a th:href="${banner.bannerPcUrl}" th:target="${banner.bannerPcIsNew} ? '_blank' : ''">
                         </th:block>
                         <img th:src="@{/banner/download/P/{bannerSeq}(bannerSeq=${banner.bannerSeq})}" alt="">
                         <!--<img src="/img/banner1.jpg" alt="">-->
@@ -115,7 +115,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"  th:each="banner : ${bannerList}">
                         <th:block th:if="${not #strings.isEmpty(banner.bannerMoUrl)}">
-                            <a th:href="@{{pcUrl}(pcUrl=${banner.bannerMoUrl})}" th:target="${banner.bannerMoIsNew} ? '_blank' : ''">
+                            <a th:href="${banner.bannerMoUrl}" th:target="${banner.bannerMoIsNew} ? '_blank' : ''">
                         </th:block>
                         <img th:src="@{/banner/download/M/{bannerSeq}(bannerSeq=${banner.bannerSeq})}" alt="">
                         <!--<img src="/img/banner1.jpg" alt="">-->
@@ -1125,7 +1125,7 @@
             <div class="modal-body">
                 <!--MO-->
                 <th:block th:if="${not #strings.isEmpty(popup.popupMoUrl)}">
-                    <a th:href="@{{pcUrl}(pcUrl=${popup.popupMoUrl})}" th:target="${popup.popupMoIsNew} ? '_blank' : ''">
+                    <a th:href="${popup.popupMoUrl}" th:target="${popup.popupMoIsNew} ? '_blank' : ''">
                 </th:block>
                 <img class="mo" th:src="@{/popup/download/M/{popupSeq}(popupSeq=${popup.popupSeq})}" alt="">
                 <th:block th:if="${not #strings.isEmpty(popup.popupMoUrl)}">
@@ -1133,7 +1133,7 @@
                 </th:block>
                 <!--PC-->
                 <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
-                    <a th:href="@{{pcUrl}(pcUrl=${popup.popupPcUrl})}" th:target="${popup.popupPcIsNew} ? '_blank' : ''">
+                    <a th:href="${popup.popupPcUrl}" th:target="${popup.popupPcIsNew} ? '_blank' : ''">
                 </th:block>
                 <img class="pc" th:src="@{/popup/download/P/{popupSeq}(popupSeq=${popup.popupSeq})}" alt="">
                 <th:block th:if="${not #strings.isEmpty(popup.popupPcUrl)}">
