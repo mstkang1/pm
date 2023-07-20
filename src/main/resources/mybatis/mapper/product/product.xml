@@ -8,10 +8,13 @@
     <!-- 제품 리스트 조회 -->
     <select id="selectProductList" parameterType="String" resultType="ProductDto">
         <![CDATA[
-        SELECT
-            *
-        FROM TBL_PRODUCT
-        WHERE BRAND_CODE = #{brandCode}
+        SELECT * FROM
+            (
+                SELECT P.*, (SELECT COUNT(*) FROM TBL_STORE S WHERE P.PRODUCT_NAME  = S.PRODUCT_NAME ) AS CNT
+                FROM TBL_PRODUCT P
+                WHERE P.BRAND_CODE = #{brandCode}
+            ) X
+        WHERE CNT > 0
         ORDER BY PRODUCT_ORDER ASC
         ]]>
     </select>
